@@ -1,0 +1,55 @@
+﻿@using Common.Globalization;
+@{
+    ViewBag.Title = "مدیریت کاربران";
+}
+
+<div class="table-container">
+    <table class="contents-grid table table-striped table-bordered table-hover table-checkable dataTable"></table>
+</div>
+
+@section PageBreadcrumb{
+    <li>
+        <i class="icon-home"></i>
+        <a href="@Url.Action("Users")">کاربران</a>
+        <i class="fa fa-angle-left"></i>
+    </li> 
+    <li>
+        <span>مدیریت کاربران</span>
+    </li>
+}
+
+@section PageActionsMenu{
+    <div class="btn-group">
+        <button class="btn btn-fit-height" href="javascript:;" data-toggle="dropdown" aria-expanded="true">
+            عملیات گروهی
+            <i class="fa fa-angle-down"></i>
+        </button>
+        <ul class="dropdown-menu pull-right">
+            <li id="block-users">
+                <a>
+                    <i class="fa fa-lock font-red"></i><span class="font-red">بلاک کردن</span>
+                </a>
+            </li>
+            <li id="unblock-users">
+                <a>
+                    <i class="fa fa-unlock font-red"></i><span class="font-red">خارج کردن از بلاک</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+}
+
+@section ComponentScripts {
+    <script src="~/content/assets/global/plugins/datatables/datatables.min.js"></script>
+    <script src="~/content/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js"></script>
+    <script src="~/content/assets/global/plugins/datatables/zw-datatable.js"></script>
+}
+
+@section PageScripts {
+    <script src="~/content/assets/pages/scripts/user_admindashboard_users.js"></script>
+}
+
+@section Head {
+    <link href="~/content/assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" />
+    <link href="~/content/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap-rtl.css" rel="stylesheet" />
+}

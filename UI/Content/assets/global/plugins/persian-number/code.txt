@@ -1,0 +1,15 @@
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+2
+<script src="persianumber.js"></script>
+
+
+<div class="demo">	
+123456789
+</div>
+
+
+<script type="text/javascript">
+$(document).ready(function(){
+$('.demo').persiaNumber('ar');	
+});	
+</script>

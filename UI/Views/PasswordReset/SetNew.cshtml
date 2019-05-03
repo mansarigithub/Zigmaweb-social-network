@@ -1,0 +1,87 @@
+﻿@model ZigmaWeb.UI.ViewModels.PasswordReset.SetNewPasswordViewModel
+@{
+    Layout = "~/Views/Shared/_SignInLayout.cshtml";
+    ViewBag.Title = "تغییر کلمه عبور";
+}
+
+@if (Model.IsPasswordResetTokenValid) {
+    <div class="portlet light ">
+        <div class="portlet-title">
+            <div class="caption font-green-haze">
+                <i class="icon-settings font-green-haze"></i>
+                <span class="caption-subject">تغییر کلمه عبور</span>
+            </div>
+        </div>
+        <div class="portlet-body form">
+            <form role="form" method="post" class="form-horizontal validatable-form">
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(model => model.UserId)
+                @Html.HiddenFor(model => model.PasswordResetToken)
+
+                <div class="form-body">
+                    <div class="form-group form-md-line-input">
+                        <div class="col-md-12 font-red">
+                            <div class="note note-danger" style="line-height: 30px;">
+                                <p>لطفا کلمه عبور جدید خود را وارد کنید</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group form-md-line-input has-success" style="border-bottom: 0 !important">
+                        @Html.LabelFor(model => model.Password, new { @class = "col-md-4 control-label" })
+                        <div class="col-md-7">
+                            <div class="input-icon right">
+                                @Html.PasswordFor(model => model.Password, new { @class = "form-control", maxlength = "25" })
+                                @Html.ValidationMessageFor2(model => model.Password)
+                                <div class="form-control-focus"> </div>
+                                <span class="help-block">لطفا یک کلمه عبور امن برای خود انتخاب کنید</span>
+                                <i class="fa fa-key"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group form-md-line-input has-success" style="border-bottom: 0 !important">
+                        @Html.LabelFor(model => model.PasswordConfirm, new { @class = "col-md-4 control-label", maxlength = "25" })
+                        <div class="col-md-7">
+                            <div class="input-icon right">
+                                @Html.PasswordFor(model => model.PasswordConfirm, new { @class = "form-control" })
+                                @Html.ValidationMessageFor2(model => model.PasswordConfirm)
+                                <div class="form-control-focus"></div>
+                                <span class="help-block">کلمه عبوری که انتخاب کرده‌اید را تکرار کنید </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-actions margin-top-10">
+                    <div class="row">
+                        <div class="col-md-offset-2 col-md-10">
+                            <button type="submit" class="btn blue">تغییر کلمه عبور</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+}
+
+@if (!Model.IsPasswordResetTokenValid) {
+    <div class="portlet light">
+        <div class="portlet-title">
+            <div class="caption font-green-haze">
+                <i class="icon-settings font-green-haze"></i>
+                <span class="caption-subject bold uppercase">تغییر کلمه عبور</span>
+            </div>
+        </div>
+        <div class="portlet-body form">
+            <div class="form-body">
+                <div class="form-group form-md-line-input">
+                    <div class="col-md-12 font-red">
+                        <div class="note note-danger" style="line-height: 30px;">
+                            <p>لینک تغییر کلمه عبور نامعتبر است</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+

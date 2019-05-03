@@ -1,0 +1,63 @@
+﻿@using ZigmaWeb.Common.ExtensionMethod
+@model ZigmaWeb.UI.ViewModels.Blog.BlogHomePageViewModel
+@{
+    Layout = "_BlogLayout.cshtml";
+    ViewBag.Title = "";
+    ViewBag.Publication = Model;
+}
+
+@foreach (var post in Model.BlogLatestPosts) {
+    <div class="portlet light ">
+        <div class="portlet-title">
+            <div class="caption font-red-sunglo">
+                <a href="/@Model.Name/post/@post.Id" class="caption-subject bold number-fa">@post.Title</a>
+            </div>
+            @*<div class="actions">
+                    <span class="number-fa">1395/22/23</span>
+                </div>*@
+        </div>
+        <div class="portlet-body content-text">
+            @Html.Raw(post.Text)
+
+            @if (post.Tags.Any()) {
+                <div class="margin-top-30">
+                    <span class="font-green-dark">برچسب ها: </span>
+                    @foreach (var tag in post.Tags) {
+                        <a href="/directory/tags/@tag.Id/1" class="btn default btn-outline btn-outline-light btn-sm">@tag.Text</a>
+                    }
+                </div>
+            }
+        </div>
+
+        <div class="portlet-footer font-red-sunglo">
+            <div class="caption number-fa">
+                <span class="caption-helper">
+                    ارسال: @post.CreateDateString
+                </span>
+                <span class="caption-helper">نویسنده:<a href="~/profile/@Model.CreatorId"> @Model.CreatorFullName</a></span>
+            </div>
+
+            <div class="left-box">
+                <a href="/@Model.Name/post/@post.Id#comments">نظرات</a>
+            </div>
+        </div>
+    </div>
+}
+
+@section head{
+    @if (string.IsNullOrWhiteSpace(Model.BlogDescription)) {
+        var metaContent = string.Format("وبلاگ شخصی {0}", Model.CreatorFullName);
+        <meta name="description" content="@metaContent" />
+    }
+    else {
+        <meta name="description" content="@Model.BlogDescription.MakeShort(155)" />
+    }
+    <meta name="keywords" content="@(string.Format("{0},{1}",Model.Title, Model.Name))"/>
+    <meta name="author" content="@Model.CreatorFullName">
+    @Styles.Render("~/visitor-blog-index-style")
+}
+
+@section PageScripts{}
+
+@section ComponentScripts{
+}

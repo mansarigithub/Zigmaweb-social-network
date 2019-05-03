@@ -1,0 +1,187 @@
+﻿@using ZigmaWeb.UI.ViewModels.Publication
+@{
+    var publication = ViewBag.Publication as PublicationViewModelBase;
+    var pageTitle = publication != null ? publication.Title : "زیگماوب";
+    var viewPublication = publication != null;
+}
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="fa" dir="rtl">
+<!--<![endif]-->
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-110959748-2"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-110959748-2');
+    </script>
+    <title>
+        @if (viewPublication) {
+            @(string.IsNullOrEmpty(ViewBag.Title) ?
+                publication.Title :
+                string.Format("{0} - {1}", ViewBag.Title, publication.Title))
+        }
+        else {
+            @(string.IsNullOrEmpty(ViewBag.Title) ?
+                "شبکه علمی و تخصصی زیگماوب" :
+                string.Format("{0}", ViewBag.Title))
+        }
+    </title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    @Styles.Render("~/visitor-layout-styles")
+    @RenderSection("Head", false)
+    <link rel="shortcut icon" href="~/content/assets/global/img/logo.ico" alt="زیگماوب"/>
+</head>
+
+<body class="page-container-bg-solid page-md">
+    <div class="page-header">
+        <div class="page-header-top">
+            <div class="container">
+                <div class="page-logo">
+                    <table>
+                        <tr>
+                            <td>
+                                <div id="logo">
+                                    <a href="/">
+                                        <img src="/content/assets/layouts/layout3/img/logo-default.png" alt="زیگماوب" class="logo-default">
+                                    </a>
+                                </div>
+                            </td>
+                            <td><h1 id="site-header"><span>@pageTitle</span><span class="header-description"> (شبکه علمی و تخصصی)</span></h1>
+                               </td>
+                        </tr>
+                    </table>
+                </div>
+                <a href="javascript:;" class="menu-toggler"></a>
+                @if (User != null) {
+                    @Html.Partial("_AuthenticatedUserTopMenu")
+                }
+                else {
+                    @Html.Partial("_GuestTopMenu")
+                }
+            </div>
+        </div>
+        <div class="page-header-menu">
+            <div class="container">
+                <form class="search-form" action="/search/">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="جستجو" name="query" value="@(ViewBag.SearchKeyword)">
+                        <span class="input-group-btn">
+                            <a href="javascript:;" class="btn submit">
+                                <i class="icon-magnifier"></i>
+                            </a>
+                        </span>
+                    </div>
+                </form>
+                 @*DOC: Apply "hor-menu-light" class after the "hor-menu" class below to have a horizontal menu with white background*@ 
+                 @*DOC: Remove data-hover="dropdown" and data-close-others="true" attributes below to disable the dropdown opening on mouse hover*@ 
+                <div class="hor-menu">
+                    <ul class="nav navbar-nav">
+                        @if (viewPublication) {
+                            @Html.Partial("_BlogHorizontalMenu", publication as ZigmaWeb.UI.ViewModels.Blog.BlogPageViewModelBase);
+                        }
+                        else {
+                            @Html.Partial("_HorizontalMenu");
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="page-container">
+        <div class="page-content-wrapper">
+            @RenderSection("PageHead", false)
+            <div class="page-content">
+                <div class="container">
+                    @RenderSection("PageBreadcrumb", false)
+                    <div class="page-content-inner">
+                        @RenderBody()
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @if (!viewPublication) {
+        <div class="page-prefooter">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3 col-sm-6 col-xs-12 footer-block">
+                        <h2>زیگماوب</h2>
+                        <p>زیگماوب یک شبکه علمی و تخصصی همگانی و آزاد برای به اشتراک گذاری دانش است.</p>
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs12 footer-block">
+                        <h2>پیوند‌ها</h2>
+                        <p>
+                            <a style="color:#a2abb7" href="@Url.RouteUrl("ArticleList", new { pageIndex = 1})">مقاله‌ها</a>
+                            |<a style="color:#a2abb7" href="@Url.RouteUrl("BlogList", new { pageIndex = 1})">وبلاگ‌ها</a>
+                            |<a style="color:#a2abb7" href="@Url.RouteUrl("TagList", new { pageIndex = 1})">برچسب‌ها</a>
+                        </p>
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-12 footer-block">
+                        <h2>به ما بپیوندید</h2>
+                        <ul class="social-icons">
+                            <li>
+                                <a href="https://www.linkedin.com/company/zigmaweb" rel="nofollow" data-original-title="linkedin" class="linkedin"></a>
+                            </li>
+                            <li>
+                                <a href="https://telegram.me/zigmaweb" rel="nofollow" data-original-title="telegram" class="telegram"></a>
+                            </li>
+                            <li>
+                                <a href="https://twitter.com/zigmaweb" rel="nofollow" data-original-title="twitter" class="twitter"></a>
+                            </li>
+                            <li>
+                                <a href="https://www.facebook.com/zigmaweb-584685935042453/" rel="nofollow" data-original-title="facebook" class="facebook"></a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-12 footer-block">
+                        <h2>تماس با ما</h2>
+                        <address class="margin-bottom-40">
+                            <span>تلگرام</span>
+                            <a href="">@@zigmaweb</a>
+                        </address>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="page-footer">
+            <div class="container">
+                <a href="~/about" rel="nofollow">درباره زیگماوب</a><span>|</span>
+                <a href="~/terms" rel="nofollow">شرایط استفاده</a><span>|</span>
+                <a href="~/privacy" rel="nofollow">حریم شخصی</a><span>|</span>
+                <a href="~/faq" rel="nofollow">پرسش های متداول</a>
+            </div>
+        </div>
+    }
+
+    <div class="scroll-to-top">
+        <i class="icon-arrow-up"></i>
+    </div>
+    <!--[if lt IE 9]>
+    <script src="../assets/global/plugins/respond.min.js"></script>
+    <script src="../assets/global/plugins/excanvas.min.js"></script>
+    <![endif]-->
+  
+    <script src="/content/assets/global/plugins/jquery.min.js"></script>
+    @if (User != null)
+    {
+        <script src="~/Scripts/jquery.signalR-2.2.1.min.js"></script>
+        <script src="/signalr/hubs"></script>
+    }
+    <script src="/content/assets/global/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/content/assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="/content/assets/global/scripts/app.min.js"></script>
+    <script src="/content/assets/layouts/layout3/scripts/layout.min.js"></script>
+    <script src="~/content/assets/global/plugins/persian-number/persianumber.min.js"></script>
+    @RenderSection("ComponentScripts", false)
+    <script src="~/content/assets/global/scripts/zigmaweb.js"></script>
+    @RenderSection("PageScripts", false)
+</body>
+</html>

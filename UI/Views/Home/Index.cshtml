@@ -1,0 +1,199 @@
+﻿@model ZigmaWeb.UI.ViewModels.Home.HomeViewModel
+@{
+    ViewBag.Title = "";
+    ViewBag.ActiveMenu = "Home";
+}
+
+<div class="row" style="margin-top:15px; margin-bottom:10px">
+    <div class="col-lg-4">
+        <div class="dashboard-stat dashboard-stat-v2 blue">
+            <div class="visual">
+                <i class="fa fa-globe"></i>
+            </div>
+            <div class="details">
+                <div class="number">
+                    <span class="number-fa" data-counter="counterup" data-value="@Model.TotalBlogPosts">شبکه علمی و تخصصی</span>
+                </div>
+                <div class="desc">
+                    <a>شبکه‌ای برای ارتباط متخصصین</a><br />
+                    <a> محیطی برای تبادل دانش</a><br />
+                    <a>امکان معرفی تخصص و کسب و کار</a><br />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="dashboard-stat dashboard-stat-v2 green-jungle">
+            <div class="visual">
+                <i class="fa fa-paper-plane"></i>
+            </div>
+            <div class="details">
+                <div class="number">
+                    <span class="number-fa" data-counter="counterup" data-value="@Model.TotalArticles">انتشار مقاله + ایجاد وبلاگ</span>
+                </div>
+                <div class="desc">
+                    <a>امکان انتشار مقاله در زمینه های تخصصی مختلف</a><br />
+                    <a>امکان ایجاد وبلاگ شخصی</a><br />
+                    <a>امکان دنبال کردن افراد و وبلاگ‌ها</a><br />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="dashboard-stat dashboard-stat-v2 yellow-crusta" >
+            <div class="visual">
+                <i class="fa fa-diamond"></i>
+            </div>
+            <div class="details">
+                <div class="number">
+                    <span class="number-fa" data-counter="counterup" data-value="@(Model.TotalArticles + Model.TotalBlogPosts)">امکانات حرفه‌ای</span>
+                </div>
+                <div class="desc">
+                    <a>۵ گیگابایت فضای ذخیره‌سازی رایگان</a><br />
+                    <a>آمار بازدید پروفایل، مقالات و وبلاگ</a><br />
+                    <a>ایجاد رزومه تخصصی، سیستم نظردهی و ...</a><br />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-8">
+       @* <div class="portlet light">
+    <div class="portlet-title">
+         <div class="caption">
+             مقالات برگزیده
+         </div>
+     </div>
+            <div class="portlet-body content-text">
+                <div class="mt-element-list">
+                    <div class="mt-list-container list-news ext-1 article-info">
+                        <ul>
+                            @foreach (var article in Model.FeaturedArticles) {
+                                var profileUrl = string.Format("/profile/{0}", article.AuthorId);
+                                <li class="mt-list-item">
+                                    <div class="list-thumb">
+                                        <a href="@profileUrl">
+                                            <img alt="@article.AuthorFullName" src="@Url.RouteUrl("V-GetProfileImage", new { userId = article.AuthorId, imageSize = "medium" })" class="medium-img">
+                                        </a>
+                                    </div>
+                                    <div class="list-item-content">
+                                        <h5 class="uppercase">
+                                            <a href="@Url.Action("index", "article", new { id = article.Id })">@article.Title</a>
+                                        </h5>
+                                        <div class="authorder-by number-fa">@article.PublishDateString - <a href="@profileUrl">@article.AuthorFullName</a></div>
+                                        <div class="content-abstract">@article.ShortAbstract</div>
+                                        @foreach (var tag in article.Tags) {
+                                            <a href="@Url.RouteUrl("TagContents", new { tagId = tag.Id })" class="btn default btn-outline btn-outline-light btn-sm">@tag.Text</a>
+                                        }
+                                    </div>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    *@
+        <div class="portlet light">
+            <div class="portlet-title">
+                <div class="caption">
+                    مقالات پربازدید
+                </div>
+            </div>
+            <div class="portlet-body content-text">
+                <div class="mt-element-list">
+                    <div class="mt-list-container list-news ext-1 article-info">
+                        <ul>
+                            @foreach (var article in Model.TopArticles) {
+                                var profileUrl = string.Format("/profile/{0}", article.AuthorId);
+                                <li class="mt-list-item">
+                                    <div class="list-thumb">
+                                        <a href="@profileUrl">
+                                            <img alt="@article.AuthorFullName" src="@Url.RouteUrl("V-GetProfileImage", new { userId = article.AuthorId, imageSize = "medium" })" class="medium-img">
+                                        </a>
+                                    </div>
+                                    <div class="list-item-content">
+                                        <h5 class="uppercase">
+                                            <a href="@Url.Action("index", "article", new { id = article.Id })">@article.Title</a>
+                                        </h5>
+                                        <div class="authorder-by number-fa">@article.PublishDateString - <a href="@profileUrl">@article.AuthorFullName</a></div>
+                                        <div class="content-abstract">@article.ShortAbstract</div>
+                                        @foreach (var tag in article.Tags) {
+                                            <a href="@Url.RouteUrl("TagContents", new { tagId = tag.Id })" class="btn default btn-outline btn-outline-light btn-sm">@tag.Text</a>
+                                        }
+                                    </div>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="portlet light">
+            <div class="portlet-title">
+                <div class="caption">
+                    آخرین مقالات
+                </div>
+            </div>
+            <div class="portlet-body content-text">
+                <div class="mt-element-list">
+                    <div class="mt-list-container list-news article-info">
+                        <ul>
+                            @foreach (var article in Model.LatestArticles) {
+                                <li class="mt-list-item">
+                                    <div class="list-item-content">
+                                        <h5 class="uppercase">
+                                            <a href="@Url.Action("index", "article", new { id = article.Id})">@article.Title</a>
+                                        </h5>
+                                        <div class="authorder-by number-fa"><a href="~/profile/@article.AuthorId">@article.AuthorFullName</a></div>
+                                    </div>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section PageScripts {
+}
+
+@section Head {
+<script type="application/ld+json">
+    {
+    "@@context": "http://schema.org/",
+    "@@type":"WebSite",
+    "name":"شبکه علمی و تخصصی زیگماوب",
+    "alternateName":"زیگماوب",
+    "description":"زیگماوب یک شبکه علمی و تخصصی همگانی و آزاد است که شما می توانید در آن در زمینه های مختلف مقاله منتشر کنید همچنین در کنار آن می توانید در صورت تمایل وبلاگ شخصی خود را ایجاد کنید",
+    "url": "http://zigmaweb.ir",
+    "sameAs": [
+    "https://www.linkedin.com/company/zigmaweb",
+    "https://telegram.me/zigmaweb",
+    "https://twitter.com/zigmaweb",
+    "https://www.facebook.com/zigmaweb-584685935042453/",
+    "https://plus.google.com/b/114236709698745310460/"
+    ],
+    "potentialAction":{
+    "@@type" :"SearchAction",
+    "target":"http://zigmaweb.ir/search/?query={search_term_string}",
+    "query-input": "required name=search_term_string"
+    }
+    }
+</script>
+    <meta name="description" content="زیگماوب یک شبکه علمی و تخصصی همگانی و آزاد برای به اشتراک گذاری دانش است" />
+    <link href="~/Content/assets/pages/css/visitor_home_index.css" rel="stylesheet" />
+
+
+}
+
+@section PageHead {}
+
+@section PageBreadcrumb {}

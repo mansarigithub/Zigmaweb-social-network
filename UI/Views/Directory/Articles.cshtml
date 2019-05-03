@@ -1,0 +1,68 @@
+﻿@model ZigmaWeb.UI.ViewModels.Article.ArticleListViewModel
+@using ZigmaWeb.UI.Infrastructure.Mvc.GlobalViewModel
+@{
+    ViewBag.Title = string.Format("مقاله‌ها (صفحه {0})", Model.PageIndex);
+    var paginationViewModel = new PaginationViewModel() {
+        PageSize = Model.PageSize,
+        SelectedPage = Model.PageIndex,
+        TotalRows = Model.TotallRows,
+        VisiblePreviousPages = 3,
+        VisibleNextPages = 3,
+        UrlTemplate = "/directory/articles/{PageIndex}"
+    };
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="mt-element-list">
+            <div class="mt-list-container list-news article-info">
+                <ul>
+                    @foreach (var article in Model.Articles) {
+                        <li class="mt-list-item">
+                            <div class="list-item-content">
+                                <h5 class="uppercase">
+                                    <a href="@Url.Action("index", "article", new { id = article.Id})">@article.Title</a>
+                                </h5>
+                                <div class="authorder-by"><span class="number-fa">@article.CreateDateString</span> - @article.AuthorFullName</div>
+                                <div class="content-abstract">@article.ShortAbstract</div>
+                            </div>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+    @Html.Partial("_pagination", paginationViewModel)
+</div>
+
+@section head {
+    <meta name="description" content="مقالات منتشر شده در شبکه علمی و تخصصی زیگماوب - صفحه @Model.PageIndex" />
+}
+
+@section PageBreadcrumb {
+    @*<ul class="page-breadcrumb breadcrumb">
+            <li>
+                <a href="index.html">برچسب ها</a>
+                <i class="fa fa-angle-left"></i>
+            </li>
+            <li>
+                <span>الگوریتم</span>
+            </li>
+        </ul>*@
+}
+
+@section PageHead {
+    <div class="page-head">
+        <div class="container">
+
+            <div class="page-title">
+                <h1>
+                    <span>مقاله‌ها</span>
+                </h1>
+            </div>
+        </div>
+    </div>
+}

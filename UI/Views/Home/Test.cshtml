@@ -1,0 +1,684 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no" />
+    <title>فعال سازی حساب کاربری</title>
+    <style>
+	.ReadMsgBody {
+    width: 100%;
+    background-color: #ffffff;
+}
+
+.ExternalClass {
+    width: 100%;
+    background-color: #ffffff;
+}
+
+    .ExternalClass, .ExternalClass p, .ExternalClass span, .ExternalClass font, .ExternalClass td, .ExternalClass div {
+        line-height: 100%;
+    }
+
+html {
+    width: 100%;
+}
+
+body {
+    -webkit-text-size-adjust: none;
+    -ms-text-size-adjust: none;
+    line-height:25px;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+table {
+    border-spacing: 0;
+}
+
+img {
+    display: block !important;
+}
+
+table td {
+    border-collapse: collapse;
+}
+
+.yshortcuts a {
+    border-bottom: none !important;
+}
+
+/*
+main color = #f05e5e
+background color = #ececec
+*/
+
+img {
+    height: auto !important;
+}
+
+@media only screen and (max-width: 640px) {
+    body {
+        width: auto !important;
+    }
+
+    table[class="container"] {
+        width: 100% !important;
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+    }
+
+    img[class="image-100-percent"] {
+        width: 100% !important;
+        height: auto !important;
+        max-width: 100% !important;
+    }
+
+    img[class="small-image-100-percent"] {
+        width: 100% !important;
+        height: auto !important;
+    }
+
+    table[class="full-width"] {
+        width: 100% !important;
+    }
+
+    table[class="full-width-text"] {
+        width: 100% !important;
+        background-color: #b91925;
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+    }
+
+    table[class="full-width-text2"] {
+        width: 100% !important;
+        background-color: #f3f3f3;
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+    }
+
+    table[class="col-2-3img"] {
+        width: 50% !important;
+        margin-right: 20px !important;
+    }
+
+    table[class="col-2-3img-last"] {
+        width: 50% !important;
+    }
+
+    table[class="col-2"] {
+        width: 47% !important;
+        margin-right: 20px !important;
+    }
+
+    table[class="col-2-last"] {
+        width: 47% !important;
+    }
+
+    table[class="col-3"] {
+        width: 29% !important;
+        margin-right: 20px !important;
+    }
+
+    table[class="col-3-last"] {
+        width: 29% !important;
+    }
+
+    table[class="row-2"] {
+        width: 50% !important;
+    }
+
+    td[class="text-center"] {
+        text-align: center !important;
+    }
+
+    table[class="remove"] {
+        display: none !important;
+    }
+
+    td[class="remove"] {
+        display: none !important;
+    }
+
+    table[class="fix-box"] {
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+    }
+
+    td[class="fix-box"] {
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+    }
+
+    td[class="font-resize"] {
+        font-size: 18px !important;
+        line-height: 25px !important;
+    }
+}
+
+@media only screen and (max-width: 479px) {
+    body {
+        font-size: 10px !important;
+    }
+
+    table[class="container"] {
+        width: 100% !important;
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+    }
+
+    table[class="container2"] {
+        width: 100% !important;
+        float: none !important;
+    }
+
+    img[class="image-100-percent"] {
+        width: 100% !important;
+        height: auto !important;
+        max-width: 100% !important;
+        min-width: 124px !important;
+    }
+
+    img[class="small-image-100-percent"] {
+        width: 100% !important;
+        height: auto !important;
+        max-width: 100% !important;
+        min-width: 124px !important;
+    }
+
+    table[class="full-width"] {
+        width: 100% !important;
+    }
+
+    table[class="full-width-text"] {
+        width: 100% !important;
+        background-color: #b91925;
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+    }
+
+    table[class="full-width-text2"] {
+        width: 100% !important;
+        background-color: #f3f3f3;
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+    }
+
+    table[class="col-2"] {
+        width: 100% !important;
+        margin-right: 0px !important;
+    }
+
+    table[class="col-2-last"] {
+        width: 100% !important;
+    }
+
+    table[class="col-3"] {
+        width: 100% !important;
+        margin-right: 0px !important;
+    }
+
+    table[class="col-3-last"] {
+        width: 100% !important;
+    }
+
+    table[class="row-2"] {
+        width: 100% !important;
+    }
+
+
+    table[id="col-underline"] {
+        float: none !important;
+        width: 100% !important;
+        border-bottom: 1px solid #eee;
+    }
+
+    td[id="col-underline"] {
+        float: none !important;
+        width: 100% !important;
+        border-bottom: 1px solid #eee;
+    }
+
+    td[class="col-underline"] {
+        float: none !important;
+        width: 100% !important;
+        border-bottom: 1px solid #eee;
+    }
+
+    td[class="text-center"] {
+        text-align: center !important;
+    }
+
+    div[class="text-center"] {
+        text-align: center !important;
+    }
+
+    table[id="clear-padding"] {
+        padding: 0 !important;
+    }
+
+    td[id="clear-padding"] {
+        padding: 0 !important;
+    }
+
+    td[class="clear-padding"] {
+        padding: 0 !important;
+    }
+
+    table[class="remove-479"] {
+        display: none !important;
+    }
+
+    td[class="remove-479"] {
+        display: none !important;
+    }
+
+    table[class="clear-align"] {
+        float: none !important;
+    }
+    /* end  clear and remove */
+
+    table[class="width-small"] {
+        width: 100% !important;
+    }
+
+    table[class="fix-box"] {
+        padding-left: 0px !important;
+        padding-right: 0px !important;
+    }
+
+    td[class="fix-box"] {
+        padding-left: 0px !important;
+        padding-right: 0px !important;
+    }
+
+    td[class="font-resize"] {
+        font-size: 14px !important;
+    }
+
+    td[class="increase-Height"] {
+        height: 10px !important;
+    }
+
+    td[class="increase-Height-20"] {
+        height: 20px !important;
+    }
+}
+
+@media only screen and (max-width: 320px) {
+    table[class="width-small"] {
+        width: 125px !important;
+    }
+
+    img[class="image-100-percent"] {
+        width: 100% !important;
+        height: auto !important;
+        max-width: 100% !important;
+        min-width: 124px !important;
+    }
+}
+
+    </style>
+</head>
+<body style="font-size: 12px; direction: rtl;">
+    <table id="mainStructure" border="0" cellspacing="0" cellpadding="0" style="background-color: #ececec;width:100%; font-family:Tahoma;">
+        <tr>
+            <td align="center" valign="top" style="background-color: #f05e5e;">
+                <table width="600" align="center" border="0" cellspacing="0" cellpadding="0" class="container" bgcolor="#f05e5e" style="background-color: #f05e5e;">
+                    <tbody>
+                        <tr>
+                            <td valign="top">
+                                <table width="560" align="center" border="0" cellspacing="0" cellpadding="0" class="full-width" bgcolor="#f05e5e" style="background-color: #f05e5e;">
+                                    <tbody>
+                                        <tr>
+                                            <td valign="top" height="10"></td>
+                                        </tr>
+                                        <tr>
+                                            <td valign="top">
+                                                <table style="width:100%" align="center" border="0" cellspacing="0" cellpadding="0">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td valign="top">
+                                                                <table align="left" border="0" cellspacing="0" cellpadding="0" class="container2">
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td>
+                                                                                <table align="center" border="0" cellspacing="0" cellpadding="0">
+                                                                                    <tbody>
+                                                                                        <tr>
+                                                                                            <td style="font-size: 16px; line-height: 27px; color: #ffffff; text-align: center;">
+                                                                                                <span style="text-decoration: none; color: #ffffff;"><a href="http://www.zigmaweb.com" style="text-decoration: none; color: rgb(255, 255, 255);">زیگماوب</a></span>
+                                                                                            </td>
+                                                                                            <td style="padding-left: 5px;" align="left" valign="middle">
+                                                                                                <!-- <img src="" width="10" alt="" style="max-width:10px; diaplay:block;" border="0" hspace="0" vspace="0"></img>-->
+                                                                                            </td>
+                                                                                        </tr>
+                                                                                    </tbody>
+                                                                                </table>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td valign="top" class="increase-Height"></td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                                <table border="0" align="right" cellpadding="0" cellspacing="0" class="container2">
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td valign="top" align="center">
+
+                                                                                <table style="direction: ltr" border="0" align="center" cellpadding="0" cellspacing="0" class="container">
+                                                                                    <tbody>
+                                                                                        <tr>
+                                                                                            <td align="center" valign="middle" id="clear-padding">
+                                                                                                <a href="https://facebook.com/zigmaweb-584685935042453/" rel="nofollow" target="_blank" style="text-decoration: none;"><img src="http://www.zigmaweb.com/content/assets/global/img/email/icon-facebook.png" width="30" alt="icon-facebook" style="max-width: 30px;" border="0" hspace="0" vspace="0" /></img></a>
+                                                                                            </td>
+                                                                                            <td s="" align="center" valign="middle" id="clear-padding">
+                                                                                                <a href="https://twitter.com/zigmaweb" style="text-decoration: none;" rel="nofollow" target="_blank"><img src="http://www.zigmaweb.com/content/assets/global/img/email/icon-twitter.png" width="30" alt="icon-twitter" style="max-width: 30px;" border="0" hspace="0" vspace="0" /></img></a>
+                                                                                            </td>
+                                                                                            <td align="center" valign="middle" id="clear-padding">
+                                                                                                <a href="https://telegram.me/zigmaweb" style="text-decoration: none;" rel="nofollow" target="_blank"><img src="http://www.zigmaweb.com/content/assets/global/img/email/icon-telegram-white.png" width="30" alt="icon-telegram" style="max-width: 30px;" border="0" hspace="0" vspace="0" /></img></a>
+                                                                                            </td>
+                                                                                            <td align="center" valign="middle" id="clear-padding">
+                                                                                                <a href="https://linkedin.com/company/zigmaweb" rel="nofollow" target="_blank"><img src="http://www.zigmaweb.com/content/assets/global/img/email/icon-linkedIn.png" width="30" alt="icon-linkedIn" style="max-width: 30px;" border="0" hspace="0" vspace="0" /></img></a>
+                                                                                            </td>
+                                                                                        </tr>
+                                                                                    </tbody>
+                                                                                </table>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td valign="top" height="10"></td>
+                                        </tr>
+                                        <tr>
+                                            <td valign="top" class="increase-Height"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </td>
+        </tr>
+        <tr>
+            <td class="full-width" width="100%" align="center" valign="top" style="background-color:#f05e5e;">
+                <table width="600" align="center" border="0" cellspacing="0" cellpadding="0" class="container" style="height: 20px; background-color: #ffffff; opacity: 0.5;">
+                    <tbody>
+                        <tr>
+                            <td valign="top" height="20"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td valign="top">
+                <table style="width:100%" align="center" border="0" cellspacing="0" cellpadding="0">
+                    <tbody>
+                        <tr>
+                            <td align="center" valign="top" class="fix-box">
+                                <!-- start top navigation container -->
+                                <table width="600" align="center" border="0" cellspacing="0" cellpadding="0" class="container" bgcolor="#ffffff" style="background-color: #ffffff;">
+                                    <tbody>
+                                        <tr>
+                                            <td valign="top">
+                                                <table width="560" align="center" border="0" cellspacing="0" cellpadding="0" class="full-width">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td valign="top" height="20"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td valign="middle">
+                                                                <table align="left" border="0" cellspacing="0" cellpadding="0" class="container2">
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td align="center" valign="top">
+                                                                                <a href="http://www.zigmaweb.com" style="text-decoration: none;"><img src="http://www.zigmaweb.com/content/assets/layouts/layout3/img/logo-default.png" alt="Logo" border="0" hspace="0" vspace="0" /></img></a>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td valign="top" class="increase-Height-20"></td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                                <table border="0" align="right" cellpadding="0" cellspacing="0" class="container2">
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td valign="middle" align="center">
+
+                                                                                <table align="right" border="0" cellpadding="0" cellspacing="0" class="clear-align" style="height: 100%;">
+                                                                                    <tbody>
+                                                                                        <tr>
+                                                                                            <td style="font-size: 13px; line-height: 18px; color: #a3a2a2; font-weight: normal; text-align: center;">
+                                                                                                <span style="text-decoration:none; color: #a3a2a2;"><a href="http://www.zigmaweb.com/about" style="text-decoration: none; color: rgb(163, 162, 162); font-family:Tahoma">درباره زیگماوب</a></span>  &nbsp;&nbsp;
+                                                                                                <span style="text-decoration:none; color: #a3a2a2;"><a href="http://www.zigmaweb.com/terms" style="text-decoration: none; color: rgb(163, 162, 162); font-family: Tahoma">شرایط استفاده</a></span>  &nbsp;&nbsp;
+                                                                                                <span style="text-decoration:none; color: #a3a2a2;"><a href="http://www.zigmaweb.com/privacy" style="text-decoration: none; color: rgb(163, 162, 162);font-family:Tahoma">حریم شخصی</a></span>&nbsp;&nbsp;
+                                                                                                <span style="text-decoration:none; color: #a3a2a2;"><a href="http://www.zigmaweb.com/faq" style="text-decoration: none; color: rgb(163, 162, 162); font-family: Tahoma">پرسش های متداول</a></span>
+                                                                                            </td>
+                                                                                        </tr>
+                                                                                    </tbody>
+                                                                                </table>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td valign="top" height="20"></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td align="center" valign="top" class="fix-box">
+                <table width="600" align="center" border="0" cellspacing="0" cellpadding="0" class="container" bgcolor="#ffffff" style="background-color: #ffffff; border-bottom: 2px solid #c7c7c7;">
+                    <tbody>
+                        <tr>
+                            <td valign="top">
+                                <table width="560" align="center" border="0" cellspacing="0" cellpadding="0" class="full-width" bgcolor="#ffffff" style="background-color: #ffffff;">
+                                    <tbody>
+                                        <tr>
+                                            <td height="20"></td>
+                                        </tr>
+                                        <tr>
+                                            <td valign="top">
+                                                <table border="0" cellspacing="0" cellpadding="0" align="left">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td style="font-family:Tahoma;font-size: 14px; line-height: 22px; color: #2a2727; font-weight:normal; text-align: right;">
+                                                                <span>{UserFullName} عزیز</span><br /><br />
+                                                                پیوستن شما به شبکه علمی زیگماوب را تبریک می گوییم. حساب کاربری شما ایجاد شده است. برای فعال سازی حساب کاربری خود روی لینک زیر کلیک نمایید.
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td height="70"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td valign="top" width="auto" align="center">
+                                                                <table border="0" align="center" cellpadding="0" cellspacing="0">
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td width="auto" align="center" valign="middle" height="32" style="background-color: #f05e5e; border-radius: 24px; background-clip: padding-box; font-size: 13px; text-align: center; color: #ffffff; font-weight: normal; padding-left: 18px; padding-right: 18px;">
+                                                                                <span style="font-weight: normal;">
+                                                                                    <a style="font-family:Tahoma;color:#ffffff;text-decoration:none" href="http://www.zigmaweb.com/signup/activateaccount?vc={VerificationCode}&u={UserId}" style="text-decoration: none; color: rgb(255, 255, 255); font-weight: normal;">
+                                                                                        فعال سازی حساب کاربری
+                                                                                    </a>
+                                                                                </span>
+                                                                            </td>
+                                                                            <td valign="top">
+                                                                                <table width="20" border="0" align="center" cellpadding="0" cellspacing="0">
+                                                                                    <tbody>
+                                                                                        <tr>
+                                                                                            <td valign="top">
+                                                                                                &nbsp;
+                                                                                            </td>
+                                                                                        </tr>
+                                                                                    </tbody>
+                                                                                </table>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td height="20"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td align="center" valign="top" class="fix-box">
+                <table width="600" align="center" border="0" cellspacing="0" cellpadding="0" class="container" bgcolor="#ffffff" style="background-color: #ffffff; border-bottom: 2px solid #c7c7c7;">
+                    <tbody>
+                        <tr>
+                            <td height="10"></td>
+                        </tr>
+                        <tr>
+                            <td valign="top">
+                                <table style="width:100%" align="center" border="0" cellspacing="0" cellpadding="0">
+                                    <tbody>
+                                        <tr>
+                                            <td valign="top">
+                                                <table border="0" align="center" cellpadding="0" cellspacing="0" class="container">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td valign="top" align="left">
+
+                                                                <table style="direction: ltr" border="0" align="left" cellpadding="0" cellspacing="0" class="container">
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td height="30" align="center" valign="middle" class="clear-padding">
+                                                                                <a href="https://facebook.com/zigmaweb-584685935042453/" rel="nofollow" target="_blank" style="text-decoration: none;">
+                                                                                    <img src="http://www.zigmaweb.com/content/assets/global/img/email/icon-facebook-gray.png" width="30" alt="icon-facebook" style="max-width: 30px;" border="0" hspace="0" vspace="0" /></img>
+                                                                                </a>
+                                                                            </td>
+                                                                            <td style="padding-left: 5px;" height="30" align="center" valign="middle" class="clear-padding">
+                                                                                <a href="https://twitter.com/zigmaweb" rel="nofollow" target="_blank" style="text-decoration: none;">
+                                                                                    <img src="http://www.zigmaweb.com/content/assets/global/img/email/icon-twitter-gray.png" width="30" alt="icon-twitter" style="max-width: 30px;" border="0" hspace="0" vspace="0" /></img>
+                                                                                </a>
+                                                                            </td>
+                                                                            <td style="padding-left: 5px;" height="30" align="center" valign="middle" class="clear-padding">
+                                                                                <a href="https://telegram.me/zigmaweb" rel="nofollow" target="_blank" style="text-decoration: none;">
+                                                                                    <img src="http://www.zigmaweb.com/content/assets/global/img/email/icon-telegram-gray.png" width="30" alt="icon-telegram" style="max-width: 30px;" border="0" hspace="0" vspace="0" /></img>
+                                                                                </a>
+                                                                            </td>
+
+
+                                                                            <td style="padding-left: 5px;" height="30" align="center" valign="middle" class="clear-padding">
+                                                                                <a href="https://linkedin.com/company/zigmaweb" rel="nofollow" target="_blank" style="text-decoration: none;">
+                                                                                    <img src="http://www.zigmaweb.com/content/assets/global/img/email/icon-linkedIn-gray.png" width="30" alt="icon-Linkedin" style="max-width: 30px;" border="0" hspace="0" vspace="0" /></img>
+                                                                                </a>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td height="10"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td valign="top">
+                <table style="width:100%" align="center" border="0" cellspacing="0" cellpadding="0">
+                    <tbody>
+                        <tr>
+                            <td align="center" valign="top" class="fix-box">
+                                <table width="600" align="center" border="0" cellspacing="0" cellpadding="0" class="container">
+                                    <tbody>
+                                        <tr>
+                                            <td valign="top">
+                                                <table width="560" align="center" border="0" cellspacing="0" cellpadding="0" class="full-width">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td valign="top" height="20"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td valign="top" height="20"></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td align="center" valign="top" class="fix-box" style="background-color: #f05e5e;">
+                <table width="600" align="center" border="0" cellspacing="0" cellpadding="0" class="container" style="background-color: #f05e5e;">
+                    <tbody>
+                        <tr>
+                            <td valign="top">
+                                <table width="560" align="center" border="0" cellspacing="0" cellpadding="0" class="container" style="background-color: #f05e5e;">
+                                    <tbody>
+                                        <tr>
+                                            <td height="10"></td>
+                                        </tr>
+                                        <tr>
+                                            <td valign="top" style="direction: ltr; font-size: 13px; line-height: 22px; color: #ffffff; font-weight: normal; text-align: center;">
+                                                ZigmaWeb , 2016 ©
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td height="10"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

@@ -1,0 +1,126 @@
+﻿@using ZigmaWeb.Common.ExtensionMethod
+@using ZigmaWeb.Common.Globalization
+@model ZigmaWeb.UI.ViewModels.UserHomePage.UserHomePageViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Html.HiddenFor(model => model.UserInfo.UserId, new { id = "ProfileId" })
+<div class="profile">
+    <div class="row">
+        <div class="col-md-3">
+            <ul class="list-unstyled profile-nav">
+                <li>
+                    <img src="/visitorservice/getprofileimage/@(Model.UserInfo.UserId)/large" class="img-responsive pic-bordered" alt="">
+                    @*<a href="javascript:;" class="profile-edit"> edit </a>*@
+                </li>
+            </ul>
+            @if (User != null && User.UserId != Model.UserInfo.UserId) {
+                <div style="text-align:center" class="margin-top-10">
+                    @if (Model.UserInfo.CurrentUserFollowsThisUser) {
+                        <a class="btn follow-btn btn-success" data-role="unfollow">
+                            <i class="fa fa-check"></i> دنبال می‌کنم
+                        </a>
+                    }
+                    else {
+                        <a class="btn follow-btn btn-default" data-role="follow">
+                            <i class="fa fa-user-plus"></i> دنبال می‌کنم
+                        </a>
+                    }
+
+                    <a class="btn message-btn btn-info"  data-toggle="modal" data-target="#messageModal">
+                        <i class="fa fa-envelope"></i>ارسال پیام
+                    </a>
+
+                </div>
+            }
+
+            <div class="portlet light margin-top-10" style="padding:5px">
+                <div>
+                    @if (!string.IsNullOrWhiteSpace(Model.UserInfo.WebSiteUrl)) {
+                        <div class="margin-top-10 profile-desc-link">
+                            <i class="fa fa-globe font-blue"></i>
+                            <a href="@Model.UserInfo.WebSiteUrl" rel="nofollow" target="_blank">
+                                وب سایت
+                            </a>
+                        </div>
+                    }
+                    @if (!string.IsNullOrWhiteSpace(Model.UserInfo.WeblogName)) {
+                        <div class="margin-top-10 profile-desc-link">
+                            <i class="fa fa-pencil-square-o font-blue"></i>
+                            <a href="/@Model.UserInfo.WeblogName" target="_blank">
+                                وبلاگ
+                            </a>
+                        </div>
+                    }
+                    @if (!string.IsNullOrWhiteSpace(Model.UserInfo.LinkedInUrl)) {
+                        <div class="margin-top-10 profile-desc-link">
+                            <i class="fa fa-linkedin font-blue"></i>
+                            <a href="@Model.UserInfo.LinkedInUrl" rel="nofollow" target="_blank">
+                                لینکدین
+                            </a>
+                        </div>
+                    }
+                    @if (!string.IsNullOrWhiteSpace(Model.UserInfo.FacebookUrl)) {
+
+                        <div class="margin-top-10 profile-desc-link">
+                            <i class="fa fa-facebook font-blue"></i>
+                            <a href="@Model.UserInfo.FacebookUrl" rel="nofollow" target="_blank">
+                                فیسبوک
+                            </a>
+                        </div>
+                    }
+                    @if (!string.IsNullOrWhiteSpace(Model.UserInfo.TwitterUrl)) {
+                        <div class="margin-top-10 profile-desc-link">
+                            <i class="fa fa-twitter font-blue"></i>
+                            <a href="@Model.UserInfo.TwitterUrl" rel="nofollow" target="_blank">
+                                توییتر
+                            </a>
+                        </div>
+                    }
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-9">
+            @RenderBody()
+        </div>
+    </div>
+
+</div>
+
+<div class="modal fade" id="messageModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">ارسال پیام خصوصی به <span class="font-blue-dark">@Model.UserInfo.FullName</span></h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="message-text" class="control-label">متن پیام:</label>
+                        <textarea class="form-control" id="messageText" rows="4"></textarea>
+                    </div>
+                    <span class="font-red error-msg" style="display:none">هنگام ارسال پیام خطایی رخ داد. لطفا از ارتباط اینترنتی خود مطمئن شوید.</span>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="sendMessageBtn">ارسال</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">لغو</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section head {
+    @RenderSection("head", false)
+}
+
+@section PageScripts {
+    @RenderSection("PageScripts", false)
+}
+
+@section ComponentScripts {
+    @RenderSection("ComponentScripts", false)
+}

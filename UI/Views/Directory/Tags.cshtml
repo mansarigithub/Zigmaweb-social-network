@@ -1,0 +1,39 @@
+﻿@model ZigmaWeb.UI.ViewModels.Tag.TagListViewModel
+@using ZigmaWeb.UI.Infrastructure.Mvc.GlobalViewModel
+@{
+    ViewBag.Title = string.Format("برچسب‌ها (صفحه {0})", Model.PageIndex);
+    var tagGroups = Model.Tags.GroupBy(tag => tag.Text.First());
+    var paginationViewModel = new PaginationViewModel() {
+        PageSize = Model.PageSize,
+        SelectedPage = Model.PageIndex,
+        TotalRows = Model.TotallRows,
+        VisiblePreviousPages = 3,
+        VisibleNextPages = 3,
+        UrlTemplate = "/directory/tags/page/{PageIndex}"
+    };
+}
+
+<div class="portlet light ">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="icon-tag font-dark"></i>
+            <span class="caption-subject font-dark bold uppercase">برچسب ها</span>
+        </div>
+    </div>
+    <div class="portlet-body">
+        @foreach (var group in tagGroups) {
+            <h4 class="block">@group.Key</h4>
+            <div>
+                @foreach (var tag in group) {
+                    <a href="@Url.RouteUrl("TagContents", new { tagId = tag.Id, pageIndex = 1})" class="btn default btn-outline btn-outline-light btn-sm">@tag.Text</a>
+                }
+            </div>
+        }
+        @Html.Partial("_pagination", paginationViewModel)
+    </div>
+</div>
+
+
+@section head {
+    <meta name="description" content="برچسب‌ها - صفحه @Model.PageIndex" />
+}

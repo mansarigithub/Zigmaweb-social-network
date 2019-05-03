@@ -1,0 +1,184 @@
+﻿@using ZigmaWeb.Common.ExtensionMethod
+@using ZigmaWeb.Common.Globalization
+@model ZigmaWeb.UI.ViewModels.Blog.BlogPostViewModel
+@{
+    Layout = "_BlogLayout.cshtml";
+    ViewBag.Publication = Model;
+    ViewBag.Title = Model.Post.Title;
+    var pageUrl = string.Format("http://zigmaweb.com/{0}/post/{1}", Model.Name, Model.Post.Id);
+}
+
+@Html.Hidden("contentId", Model.Post.Id)
+<div class="content">
+    <div class="portlet light">
+        <div class="portlet-title">
+            <div class="caption">
+                @Model.Post.Title
+            </div>
+            <div class="actions">
+                <div class="btn-group">
+                    <a class="btn btn-link font-red-flamingo" href="javascript:;" data-toggle="dropdown" aria-expanded="false">
+                        <i class="fa fa-share-alt md-skip"></i> اشتراک گذاری
+                        <i class="fa fa-angle-down "></i>
+                    </a>
+                    <ul class="dropdown-menu pull-right">
+                        <li>
+                            <a href="https://telegram.me/share/url?url=@pageUrl&text=@Model.Post.Title" rel="nofollow" target="_blank">
+                                <i class="fa fa-paper-plane"></i> تلگرام
+                            </a>
+                        </li>
+                        <li>
+                            <a href="http://www.linkedin.com/shareArticle?mini=true&url=@pageUrl&title=@Model.Post.Title" rel="nofollow" target="_blank">
+                                <i class="fa fa-linkedin"></i> لینکدین
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://twitter.com/share?text=@Model.Post.Title&url=@pageUrl" rel="nofollow" target="_blank">
+                                <i class="fa fa-twitter"></i> توییتر
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.facebook.com/sharer.php?u=@pageUrl&t=@Model.Post.Title" rel="nofollow" target="_blank">
+                                <i class="fa fa-facebook"></i> فیسبوک
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="portlet-body content-text">
+            @Html.Raw(Model.Post.Text)
+            @if (Model.Post.Tags.Any()) {
+                <div class="margin-top-30">
+                    <span class="font-green-dark">برچسب ها: </span>
+                    @foreach (var tag in Model.Post.Tags) {
+                        <a href="/directory/tags/@tag.Id/1" class="btn default btn-outline btn-outline-light btn-sm">@tag.Text</a>
+                    }
+                </div>
+            }
+        </div>
+
+        <div class="portlet-footer font-red-sunglo">
+            <div class="caption number-fa">
+                <span class="caption-helper">
+                    ارسال: @Model.Post.CreateDateString
+                </span>
+                <span class="caption-helper">
+                    نویسنده: @Model.Post.AuthorFullName
+                </span>
+            </div>
+        </div>
+    </div>
+
+    @if (!Model.PreviewMode) {
+        <div class="comment-area" id="comments">
+            <input type="hidden" id="commentsCounter" value="@Model.Comments.Count()" />
+            @if (User != null) {
+                <div id="comment-template" class="item">
+                    <div class="item-head">
+                        <div class="item-details">
+                            <img class="item-pic rounded" src="@Url.RouteUrl("V-GetProfileImage", new { userId = User.UserId, imageSize = "small"})">
+                            <a href="/profile/@User.UserId" class="item-name">@User.FullName</a>
+                            <span class="item-label"></span>
+                        </div>
+                        @*<span class="item-status">
+                                <span class="badge badge-empty badge-success"></span>
+                                <i>comment tools, Like, Rate</i>
+                            </span>*@
+                    </div>
+                    <div class="item-body"></div>
+                </div>
+            }
+
+            <div class="portlet light comment-portlet @(Model.Comments.Any()? "" : "hide")">
+                <div class="portlet-title">
+                    <div class="caption caption-md">
+                        @*<i class="icon-speech font-dark"></i>*@
+                        <span class="caption-subject font-dark">نظرات</span>
+                        <span class="badge badge-info comments-count number-fa">@Model.Comments.Count()</span>
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <div class="general-item-list">
+                        @foreach (var comment in Model.Comments) {
+                            <div class="item">
+                                <div class="item-head">
+                                    <div class="item-details">
+                                        <img class="item-pic rounded" src="@Url.RouteUrl("V-GetProfileImage", new { userId = comment.SenderId, imageSize = "small"})">
+                                        <a href="/profile/@comment.SenderId" class="item-name">@comment.SenderFullName</a>
+                                        <span class="item-label number-fa">@comment.CreateDate.ToPersianDate("g")</span>
+                                    </div>
+                                    @*<span class="item-status">
+                                            <span class="badge badge-empty badge-success"></span>
+                                            <i>comment tools, Like, Rate</i>
+                                        </span>*@
+                                </div>
+                                <div class="item-body font-blue-dark">
+                                    @Html.Raw(comment.Text.ToHtml())
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+
+            @if (User != null) {
+                <div class="portlet light new-comment-area">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <span class="caption-helper font-dark">دیدگاه خود را بنویسید</span>
+                        </div>
+                        <div class="actions">
+                            <button id="registerCommentButton" class="btn blue" type="button">ثبت</button>
+                        </div>
+                    </div>
+                    <div class="portlet-body">
+                        <textarea id="commentText" class="form-control" rows="5" style="border-width:0; max-width:100%;"></textarea>
+                        <div class="md-checkbox has-info">
+                            <input type="checkbox" id="isPrivateCheckbox" class="md-check">
+                            <label for="isPrivateCheckbox" class="font-blue-dark">
+                                <span class="inc"></span>
+                                <span class="check"></span>
+                                <span class="box border-blue-dark"></span> به صورت محرمانه برای نویسنده ارسال شود
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            }
+
+            @if (User == null) {
+                <div class="portlet light">
+                    <div class="portlet-body">
+                        <span class="caption-helper">برای ارسال دیدگاه وارد حساب کاربری خود شوید.</span><br /><br />
+                        <a href="/signin" class="btn blue" style="font-weight:400;">ورود به حساب کاربری</a>
+                        <a href="/signup" class="btn blue" style="font-weight:400;">ایجاد حساب کاربری</a>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>
+
+@section head {
+    <meta name="description" content="@Model.Post.Title.MakeShort(155)"/>
+    <meta name="keywords" content="@string.Join(",", Model.Tags.Select(t => t.Text).ToArray())">
+    <meta name="author" content="@Model.CreatorFullName">
+    @Styles.Render("~/visitor-blog-post-styles")
+    <meta property="og:url" content="@Url.Action("index", "article", new { id = Model.Post.Id})" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="@Model.Post.Title" />
+    <meta property="og:image" content="/visitorservice/getprofileimage/@Model.Post.AuthorId/medium" />
+    @*<meta property="og:locale" content="" />*@
+    <meta property="og:site_name" content="شبکه علمی و تخصصی زیگماوب" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="@Model.Post.Title" />
+    <meta name="twitter:image" content="/visitorservice/getprofileimage/@Model.Post.AuthorId/medium" />
+}
+
+@section PageScripts {
+    @Scripts.Render("~/visitor-blog-scripts")
+}
+
+@section ComponentScripts {
+   
+}

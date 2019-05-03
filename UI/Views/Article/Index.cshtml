@@ -1,0 +1,334 @@
+﻿@using ZigmaWeb.Common.ExtensionMethod
+@using ZigmaWeb.Common.Globalization
+@model ZigmaWeb.UI.ViewModels.Article.ArticleViewModel
+@{
+    ViewBag.Title = Model.Article.Title;
+    var baseUrl = "http://zigmaweb.com";
+    var pageUrl = string.Format("{0}/article/{1}", baseUrl, Model.Article.Id);
+    var aboutMe = string.IsNullOrEmpty(Model.AuthorProfile.AboutMe) ? "" :
+        Model.AuthorProfile.AboutMe.Replace(Environment.NewLine, "<br/>");
+}
+
+@Html.Hidden("contentId", Model.Article.Id)
+<div class="row all">
+    <div class="col-lg-9">
+        <div class="content">
+            <div class="portlet content-portlet">
+                <div class="portlet-title">
+                    <div class="caption">
+                        @Model.Article.Title
+                    </div>
+
+                    @if (!Model.PreviewMode) {
+                        <div class="actions">
+                            <div class="btn-group">
+                                <a class="btn btn-link font-red-flamingo" href="javascript:;" data-toggle="dropdown" aria-expanded="false">
+                                    <i class="fa fa-share-alt md-skip"></i> اشتراک گذاری
+                                    <i class="fa fa-angle-down "></i>
+                                </a>
+                                <ul class="dropdown-menu pull-right">
+                                    <li>
+                                        <a href="https://telegram.me/share/url?url=@pageUrl&text=@Model.Article.Title" rel="nofollow" target="_blank">
+                                            <i class="fa fa-paper-plane"></i> تلگرام
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="http://www.linkedin.com/shareArticle?mini=true&url=@pageUrl&title=@Model.Article.Title" rel="nofollow" target="_blank">
+                                            <i class="fa fa-linkedin"></i> لینکدین
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://twitter.com/share?text=@Model.Article.Title&url=@pageUrl" rel="nofollow" target="_blank">
+                                            <i class="fa fa-twitter"></i> توییتر
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://www.facebook.com/sharer.php?u=@pageUrl&t=@Model.Article.Title" rel="nofollow" target="_blank">
+                                            <i class="fa fa-facebook"></i> فیسبوک
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+                <div class="portlet-body content-text">
+                    @if (!string.IsNullOrWhiteSpace(Model.Article.ShortAbstract)) {
+                        <div class="content-short-abstract">
+                            @Html.Raw(Model.Article.ShortAbstract)
+                        </div>
+                    }
+
+                    <div class="profile-info">
+                        <ul class="list-inline">
+                            <li title="نویسنده">
+                                <i class="font-blue fa fa-user "></i>@Model.Article.AuthorFullName
+                            </li>
+                            <li title="تاریخ انتشار">
+                                <i class="fa fa-calendar"></i><span class="number-fa">@Model.Article.CreateDateString</span>
+                            </li>
+                            <li title="دیدگاه‌های ارسال شده برای این مقاله">
+                                <i class="fa fa-comment"></i><span class="number-fa">@Model.Comments.Count()</span>
+                            </li>
+                            <li title="تعداد بازدید">
+                                <i class="icon-eye"></i><span class="number-fa">@Model.TotalVisits</span>
+                            </li>
+                        </ul>
+                    </div>
+
+
+                    @Html.Raw(Model.Article.Text)
+                </div>
+            </div>
+
+            <div class="row profile-info">
+                <div class="col-md-2">
+                    <a href="~/profile/@Model.Article.AuthorId">
+                        <img src="/visitorservice/getprofileimage/@Model.Article.AuthorId/large" class="img-responsive pic-bordered" alt="">
+                    </a>
+                </div>
+                <div class="col-md-10">
+                    <a href="~/profile/@Model.Article.AuthorId">
+                        <h4 class="" style="margin-top: 0;">@Model.Article.AuthorFullName</h4>
+                    </a>
+                    <p class="about" style="margin-top: 10px;">@Html.Raw(aboutMe)</p>
+                    <ul class="list-inline">
+                        <li>
+                            <i class="fa fa-map-marker"></i> ایران
+                        </li>
+                        <li>
+                            <a href="~/profile/@Model.Article.AuthorId">
+                                <i class="fa fa-user"></i>مشاهده پروفایل
+                            </a>
+                        </li>
+                        @*<li>
+                                <i class="fa fa-briefcase"></i> 23 مقاله
+                            </li>
+                            <li>
+                                <i class="fa fa-star"></i> 12 پست وبلاگ
+                            </li>
+                            <li>
+                                <i class="fa fa-heart"></i> رتبه 2.34
+                            </li>*@
+                    </ul>
+                </div>
+            </div>
+
+            @if (!Model.PreviewMode) {
+                <div class="comment-area">
+                    <input type="hidden" id="commentsCounter" value="@Model.Comments.Count()" />
+                    @if (User != null) {
+                    <div id="comment-template" class="item">
+                        <div class="item-head">
+                            <div class="item-details">
+                                <a href="/profile/@User.UserId">
+                                    <img class="item-pic rounded" src="@Url.RouteUrl("V-GetProfileImage", new { userId = User.UserId, imageSize = "small"})">
+                                </a>
+                                <a href="/profile/@User.UserId" class="item-name">@User.FullName</a>
+                                <span class="item-label"></span>
+                            </div>
+                            <span class="item-status">
+                                <i class="number-fa"></i>
+                            </span>
+                        </div>
+                        <div class="item-body font-blue-dark"></div>
+                    </div>
+                    }
+
+                    <div class="portlet light comment-portlet @(Model.Comments.Any()? "" : "hide")">
+                        <div class="portlet-title">
+                            <div class="caption caption-md">
+                                @*<i class="icon-speech font-dark"></i>*@
+                                <span class="caption-subject font-dark">نظرات</span>
+                                <span class="badge badge-info comments-count number-fa">@Model.Comments.Count()</span>
+                            </div>
+                        </div>
+                        <div class="portlet-body">
+                            <div class="general-item-list">
+                                @foreach (var comment in Model.Comments) {
+                                <div class="item">
+                                    <div class="item-head">
+                                        <div class="item-details">
+                                            <a class="img-link" href="/profile/@comment.SenderId">
+                                                <img class="item-pic rounded" src="@Url.RouteUrl("V-GetProfileImage", new {userId = comment.SenderId, imageSize = "small"})">
+                                            </a>
+                                            <a href="/profile/@comment.SenderId" class="item-name">@comment.SenderFullName</a>
+                                            @*<span class="item-label number-fa">@comment.CreateDate.ToPersianDate("g")</span>*@
+                                        </div>
+                                        <span class="item-status">
+                                            <i class="number-fa">@comment.CreateDate.ToPersianDate("g")</i>
+                                        </span>
+                                    </div>
+                                    <div class="item-body font-blue-dark">
+                                        @Html.Raw(comment.Text.ToHtml())
+                                    </div>
+                                </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+                    @if (User != null) {
+                    <div class="portlet light new-comment-area">
+                        <div class="portlet-title">
+                            <div class="caption">
+                                <span class="caption-helper font-dark">دیدگاه خود را بنویسید</span>
+                            </div>
+                            <div class="actions">
+                                <button id="registerCommentButton" class="btn blue" type="button">ثبت</button>
+                            </div>
+                        </div>
+                        <div class="portlet-body">
+                            <textarea id="commentText" class="form-control" rows="5" style="border-width:0; max-width:100%;"></textarea>
+                            <div class="md-checkbox has-info">
+                                <input type="checkbox" id="isPrivateCheckbox" class="md-check">
+                                <label for="isPrivateCheckbox" class="font-blue-dark">
+                                    <span class="inc"></span>
+                                    <span class="check"></span>
+                                    <span class="box border-blue-dark"></span> به صورت محرمانه برای نویسنده ارسال شود
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    }
+
+                    @if (User == null) {
+                    <div class="portlet light">
+                        <div class="portlet-body">
+                            <span class="caption-helper">برای ارسال دیدگاه وارد حساب کاربری خود شوید.</span><br /><br />
+                            <a href="/signin" class="btn blue" style="font-weight:400;">ورود به حساب کاربری</a>
+                            <a href="/signup" class="btn blue" style="font-weight:400;">ایجاد حساب کاربری</a>
+                        </div>
+                    </div>
+                    }
+                </div>
+            }
+        </div>
+    </div>
+    <div class="col-lg-3">
+        @if (Model.RelatedArticles.Any() && !Model.PreviewMode) {
+            <div class="sidebar-section">
+                <h4>مقالات مرتبط</h4>
+                <div class="link-box">
+                    @foreach (var article in Model.RelatedArticles) {
+                        <a href="@Url.Action("index", new { id = article.Id})">@article.Title</a>
+                    }
+                </div>
+            </div>
+        }
+
+        @if (Model.UserRelatedArticles.Any() && !Model.PreviewMode) {
+            <div class="sidebar-section">
+                <h4>دیگر مقالات مرتبط <a style="color:inherit" href="~/profile/@Model.Article.AuthorId">@Model.Article.AuthorFullName</a> </h4>
+                <div class="link-box">
+                    @foreach (var article in Model.UserRelatedArticles) {
+                        <a href="@Url.Action("index", new { id = article.Id})">@article.Title</a>
+                    }
+                </div>
+            </div>
+        }
+
+        @if (Model.TopArticles.Any() && !Model.PreviewMode) {
+            <div class="sidebar-section">
+                <h4>مقالات برتر</h4>
+                <div class="link-box">
+                    @foreach (var article in Model.TopArticles) {
+                        <a href="@Url.Action("index", new { id = article.Id})">@article.Title</a>
+                    }
+                </div>
+            </div>
+        }
+
+        @if (Model.Tags.Any()) {
+            <div class="sidebar-section">
+                <h4>برچسب‌ها</h4>
+                <div>
+                    @foreach (var tag in Model.Tags) {
+                        <a href="/directory/tags/@tag.Id/1" class="btn default btn-outline btn-outline-light btn-sm">@tag.Text</a>
+                    }
+                </div>
+            </div>
+        }
+
+        @if (!string.IsNullOrEmpty(Model.AuthorBusinessIntroduce.Text) && !Model.PreviewMode) {
+            <div class="sidebar-section JustifyFull">
+                <h4>کسب و کار نویسنده</h4>
+                <span style="text-align:justify!important;line-height: 20px;">
+                    @Html.Raw(Model.AuthorBusinessIntroduce.Text.Replace(Environment.NewLine, "</br>"))
+                </span>
+            </div>
+        }
+
+        @*<div class="sidebar-section">
+                <h4>تبلیغات</h4>
+                <div>
+                    <script src="~/Content/assets/global/scripts/anetworkads.js"></script>
+                </div>
+            </div>*@
+    </div>
+</div>
+
+@section head {
+    @if (string.IsNullOrWhiteSpace(Model.Article.ShortAbstract)) {
+        <meta name="description" content="@Model.Article.Title.MakeShort(155)" />
+    }
+    else {
+        <meta name="description" content="@Model.Article.ShortAbstract.MakeShort(155)" />
+    }
+    <meta name="keywords" content="@string.Join(",", Model.Tags.Select(t => t.Text).ToArray())">
+    <meta name="author" content="@Model.Article.AuthorFullName">
+    <meta property="og:url" content="@Url.Action("index", "article", new { id = Model.Article.Id })" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="@Model.Article.Title" />
+    <meta property="og:description" content="@Model.Article.ShortAbstract" />
+    <meta property="og:image" content="@baseUrl/visitorservice/getprofileimage/@Model.Article.AuthorId/medium" />
+    @*<meta property="og:locale" content="" />*@
+    <meta property="og:site_name" content="شبکه علمی و تخصصی زیگماوب" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="@Model.Article.Title" />
+    <meta name="twitter:description" content="@Model.Article.ShortAbstract" />
+    <meta name="twitter:image" content="@baseUrl/visitorservice/getprofileimage/@Model.Article.AuthorId/medium" />
+
+    @Styles.Render("~/visitor-article-styles")
+
+    <!-- JSON-LD markup generated by Google Structured Data Markup Helper. -->
+<script type="application/ld+json">
+    {
+    "@@context" : "http://schema.org",
+    "@@type" : "Article",
+    "name" : "@Model.Article.Title",
+    "author" : {
+    "@@type" : "Person",
+    "name" : "@Model.Article.AuthorFullName"
+    },
+    "datePublished" : "@Model.Article.CreateDate",
+    "image" : "http://zigmaweb.ir/visitorservice/getprofileimage/@Model.Article.AuthorId/large",
+    "articleSection" : "@Model.Article.ShortAbstract",
+    "articleBody" : "@Model.Article.Text",
+    "url" : "http://zigmaweb.ir/article/@Model.Article.Id",
+    "publisher" : {
+    "@@type" : "Organization",
+    "name" : "زیگماوب",
+    "logo": {
+    "@@type": "ImageObject",
+    "name": "zigmaweb",
+    "width": "41",
+    "height": "41",
+    "url": "http://zigmaweb.ir/content/assets/layouts/layout3/img/logo-default.png"
+    }
+    },
+    "headline":"@Model.Article.Title",
+    "dateModified":"@Model.Article.CreateDate",
+    "mainEntityOfPage":"@Model.Article.Title"
+    }
+</script>
+}
+
+@section PageScripts {
+    @Scripts.Render("~/visitor-article-scripts")
+}
+
+@section ComponentScripts {
+   
+}

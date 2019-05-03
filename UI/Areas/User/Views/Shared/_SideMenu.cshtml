@@ -1,0 +1,241 @@
+﻿@{
+    var userIsAdmin = User.IsInRole("admin");
+}
+
+<div class="page-sidebar-wrapper">
+    @*<!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
+        <!-- DOC: Change data-auto-speed="200" to adjust the sub menu slide up/down speed -->*@
+    <div class="page-sidebar navbar-collapse collapse">
+        @*<!-- BEGIN SIDEBAR MENU -->
+            <!-- DOC: Apply "page-sidebar-menu-light" class right after "page-sidebar-menu" to enable light sidebar menu style(without borders) -->
+            <!-- DOC: Apply "page-sidebar-menu-hover-submenu" class right after "page-sidebar-menu" to enable hoverable(hover vs accordion) sub menu mode -->
+            <!-- DOC: Apply "page-sidebar-menu-closed" class right after "page-sidebar-menu" to collapse("page-sidebar-closed" class must be applied to the body element) the sidebar sub menu mode -->
+            <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
+            <!-- DOC: Set data-keep-expand="true" to keep the submenues expanded -->
+            <!-- DOC: Set data-auto-speed="200" to adjust the sub menu slide up/down speed -->*@
+        <ul class="page-sidebar-menu  page-header-fixed page-sidebar-menu-hover-submenu " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
+            <li class="nav-item start active open">
+                <a href="@Url.Action("index", "dashboard")" class="nav-link nav-toggle">
+                    <i class="icon-home"></i>
+                    <span class="title">داشبورد</span>
+                    <span class="selected"></span>
+                    @*<span class="arrow open"></span>*@
+                </a>
+            </li>
+
+            @if (userIsAdmin) {
+                <li class="nav-item  ">
+                    <a href="javascript:;" class="nav-link nav-toggle">
+                        <i class="icon-globe"></i>
+                        <span class="title">مدیریت</span>
+                        <span class="arrow"></span>
+                    </a>
+                    <ul class="sub-menu">
+                        <li class="nav-item">
+                            <a href="@Url.Action("index", "admindashboard")" class="nav-link ">
+                                <i class="icon-screen-desktop"></i>
+                                <span class="title">داشبورد مدیریت</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("users", "admindashboard")" class="nav-link ">
+                                <i class="icon-user"></i>
+                                <span class="title">مدیریت کاربران</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("articles", "admindashboard")" class="nav-link ">
+                                <i class="icon-docs"></i>
+                                <span class="title">مدیریت مقاله­ها</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("blogposts", "admindashboard")" class="nav-link ">
+                                <i class="icon-docs"></i>
+                                <span class="title">مدیریت بلاگ پست ها</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            }
+
+            <li class="nav-item  ">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="icon-docs"></i>
+                    <span class="title">مقاله­‌ها</span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    <li class="nav-item">
+                        <a href="/user/article/add" class="nav-link ">
+                            <i class="icon-plus"></i>
+                            <span class="title">مقاله جدید</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="@Url.Action("index", "article")" class="nav-link ">
+                            <i class="icon-docs"></i>
+                            <span class="title">مدیریت مقاله­‌ها</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="icon-note"></i>
+                    <span class="title">وبلاگ</span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    @if (User.HasBlog) {
+                        <li>
+                            <a href="/@User.Blogs.First().Name" target="_blank">
+                                <i class="icon-eye"></i> مشاهده وبلاگ
+                            </a>
+                        </li>
+                        <li class="divider"> </li>
+                            <li class="nav-item">
+                                <a href="/user/blog/add" class="nav-link ">
+                                    <i class="icon-plus"></i>
+                                    <span class="title">پست جدید</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="@Url.Action("index", "blog")" class="nav-link">
+                                    <i class="icon-note"></i>
+                                    <span class="title">مدیریت پست ها</span>
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="/user/bloglink" class="nav-link ">
+                                    <i class="icon-link"></i>
+                                    <span class="title">پیوندهای وبلاگ</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/user/setupblog/edit" class="nav-link ">
+                                    <i class="icon-settings"></i>
+                                    <span class="title">تنظیمات وبلاگ</span>
+                                </a>
+                            </li>
+                    }
+                    else {
+                        <li class="nav-item">
+                            <a href="@Url.Action("index", "setupblog")" class="nav-link">
+                                <i class="icon-docs"></i>
+                                <span class="title">ایجاد وبلاگ</span>
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="icon-bubbles"></i>
+                    <span class="title">دیدگاه‌ها</span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    <li class="nav-item  ">
+                        <a href="/user/comment" class="nav-link ">
+                            <i class="icon-bubbles"></i>
+                            <span class="title">همه دیدگاه‌ها</span>
+                            @*<span class="badge badge-danger">2</span>*@
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="icon-envelope"></i>
+                    <span class="title">پیام‌ها</span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    <li class="nav-item  ">
+                        <a href="/user/message" class="nav-link ">
+                            <i class="icon-envelope"></i>
+                            <span class="title">پیام‌های دریافتی</span>
+                            @*<span class="badge badge-danger">2</span>*@
+                        </a>
+                    </li>
+                    <li class="nav-item  ">
+                        <a href="/user/message/sent" class="nav-link ">
+                            <i class="icon-envelope"></i>
+                            <span class="title">پیام‌های ارسالی</span>
+                            @*<span class="badge badge-danger">2</span>*@
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="nav-item  ">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="icon-chart"></i>
+                    <span class="title">آمار</span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    <li class="nav-item  ">
+                        <a href="@Url.Action("index", "statistics")" class="nav-link ">
+                            <span class="title">آمار کلی</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="nav-item">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="icon-layers"></i>
+                    <span class="title">تخصص‌ و کسب‌وکار</span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    <li class="nav-item  ">
+                        <a href="@Url.Action("index", "resume")" class="nav-link ">
+                            <i class="icon-layers"></i>
+                            <span class="title">سوابق تحصیلی و کاری</span>
+                        </a>
+                    </li>
+                    <li class="nav-item  ">
+                        <a href="@Url.Action("index", "business")" class="nav-link ">
+                            <i class="icon-badge"></i>
+                            <span class="title">کسب و کار</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="nav-item">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="icon-user"></i>
+                    <span class="title">حساب کاربری</span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    @*<li class="nav-item  ">
+                            <a href="@Url.Action("index", "profileoverview")" class="nav-link ">
+                                <i class="icon-home"></i>
+                                <span class="title">مشاهده</span>
+                            </a>
+                        </li>*@
+                    <li class="nav-item  ">
+                        <a href="@Url.Action("index", "profilesettings")" class="nav-link ">
+                            <i class="icon-user"></i>
+                            <span class="title">مدیریت حساب کاربری</span>
+                        </a>
+                    </li>
+                    <li class="nav-item  ">
+                        <a href="@Url.Action("index", "media")" class="nav-link ">
+                            <i class="icon-picture"></i>
+                            <span class="title">مدیریت فایل‌ها</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+        </ul>
+    </div>
+</div>
+

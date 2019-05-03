@@ -1,0 +1,54 @@
+﻿
+@{
+    ViewBag.Title = "مدیریت مطالب";
+}
+
+<form id="gridForm" method="post" action="/user/blog/edit">
+    <input id="contentId" name="contentId" type="hidden" />
+
+    <div class="table-container">
+        <table class="contents-grid table table-striped table-bordered table-hover table-checkable dataTable"></table>
+    </div>
+</form>
+
+@section PageBreadcrumb{
+    <li>
+        <i class="icon-home"></i>
+        <a href="@Url.Action("index")">وبلاگ</a>
+        <i class="fa fa-angle-left"></i>
+    </li>
+    <li>
+        <span>مدیریت پست ها</span>
+    </li>
+}
+
+@section PageActionsMenu{
+    <div class="btn-group">
+        <button class="btn btn-fit-height" href="javascript:;" data-toggle="dropdown" aria-expanded="true">
+            عملیات گروهی
+            <i class="fa fa-angle-down"></i>
+        </button>
+        <ul class="dropdown-menu pull-right">
+            <li class="delete-posts">
+                <a>
+                    <i class="fa fa-trash-o font-red"></i><span class="font-red">انتقال به زباله‌دان</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+}
+
+@section ComponentScripts {
+    <script src="~/content/assets/global/plugins/datatables/datatables.min.js"></script>
+    <script src="~/content/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js"></script>
+    <script src="~/content/assets/global/plugins/datatables/zw-datatable.js"></script>
+}
+
+@section PageScripts {
+    <script src="~/content/assets/pages/scripts/user_blog_index.js"></script>
+}
+
+@section Head {
+    <link href="~/content/assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" />
+    <link href="~/content/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap-rtl.css" rel="stylesheet" />
+}

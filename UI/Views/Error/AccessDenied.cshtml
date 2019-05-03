@@ -1,0 +1,25 @@
+﻿@{
+    ViewBag.Title = "شما مجوز دسترسی به این صفحه را ندارید";
+}
+
+@section styles{
+    <style>
+        #child-body {
+            text-align: center;
+            margin-top: 90px;
+        }
+
+        #child-body h5{
+            font-size:27px;
+            color:#ff6a00;
+            margin-top:30px;
+        }
+    </style>
+}
+
+<div id="child-body">
+    <a href="~/Home/Index">
+        <img src="~/Content/Images/128x128/access_denied.png" />
+    </a>
+    <h5>شما مجوز دسترسی به این صفحه را ندارید! </h5>
+</div>

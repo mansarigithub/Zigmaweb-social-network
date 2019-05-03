@@ -1,0 +1,50 @@
+﻿@model ZigmaWeb.UI.ViewModels.SignUp.AccountActivationViewModel
+@{
+    Layout = "~/Views/Shared/_SignInLayout.cshtml";
+    var activationSuccessful = string.IsNullOrWhiteSpace(Model.ErrorMessage);
+}
+<div class="portlet light ">
+    <div class="portlet-title">
+        <div class="caption font-green-haze">
+            <i class="icon-settings font-green-haze"></i>
+            <span class="caption-subject">فعال‌سازی حساب کاربری</span>
+        </div>
+    </div>
+    <div class="portlet-body">
+        <div style="margin:0 10px">
+            <div style="padding: 60px 0 80px 0; clear:both">
+                <div style="float:right ;margin-left:20px">
+                    @if (activationSuccessful) {
+                        <i class="fa fa-flag font-green-jungle" style="font-size:50px"></i>
+                    }
+                    else {
+                        <i class="fa fa-exclamation-triangle font-red" style="font-size:50px"></i>
+                    }
+                </div>
+                <div style="float:right">
+                    @if (activationSuccessful) {
+                        <span>
+                            حساب کاربری شما فعال شد.
+                        </span>
+                    }
+                    else {
+                        <span>
+                            @Model.ErrorMessage
+                        </span>
+                    }
+                </div>
+            </div>
+
+            @if (activationSuccessful) {
+                <div class="note note-danger" style="line-height: 30px;">
+                    پیوستن شما به زیگماوب را تبریک می‌گوییم.<br />
+                    حساب کاربری شما فعال شده است. هم‌اکنون می‌توانید وارد حساب کاربری خود شوید.
+                </div>
+                <div style="padding-top:20px">
+                    <a class="btn font-white bg-blue" href="@Url.Action("index", "signin")">ورود به حساب کاربری</a>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+

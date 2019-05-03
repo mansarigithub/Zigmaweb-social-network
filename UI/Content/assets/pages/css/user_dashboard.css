@@ -1,0 +1,12 @@
+.mt-comments .mt-comment .mt-comment-body .mt-comment-info .mt-comment-author {
+    font-weight: normal;
+    color: #23173a;
+}
+
+.portlet.light>.portlet-title>.caption>.caption-subject {
+    font-weight: 500;
+}
+
+.data-portlet {
+    min-height:500px;
+}

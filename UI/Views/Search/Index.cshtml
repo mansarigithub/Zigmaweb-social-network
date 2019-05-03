@@ -1,0 +1,83 @@
+﻿@using ZigmaWeb.Common.ExtensionMethod
+@using ZigmaWeb.UI.Infrastructure.Mvc.GlobalViewModel
+@model ZigmaWeb.UI.ViewModels.Search.SearchViewModel
+@{
+    ViewBag.Title = string.Format("جستجو", Model.PageIndex);
+    var paginationViewModel = new PaginationViewModel() {
+        PageSize = Model.PageSize,
+        SelectedPage = Model.PageIndex,
+        TotalRows = Model.TotallRows,
+        VisiblePreviousPages = 3,
+        VisibleNextPages = 3,
+        UrlTemplate = "/directory/articles/{PageIndex}"
+    };
+}
+
+@if (Model.Articles.Any())
+{
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="mt-element-list">
+                <div class="mt-list-container list-news article-info">
+                    <ul>
+                        @foreach (var article in Model.Articles)
+                        {
+                            <li class="mt-list-item">
+                                <div class="list-item-content">
+                                    <h5 class="uppercase">
+                                        <a href="@Url.Action("index", "article", new { id = article.Id})">@Html.Raw(article.Title.HighlightKeyWords(Model.Keyword,false))</a>
+                                    </h5>
+                                    <div class="authorder-by"><span class="number-fa">@article.CreateDateString</span> - @article.AuthorFullName</div>
+                                    <div class="content-abstract">@Html.Raw(article.ShortAbstract.HighlightKeyWords(Model.Keyword, false))</div>
+                                    @foreach (var tag in article.Tags)
+                                    {
+                                        <a href="@Url.RouteUrl("TagContents", new { tagId = tag.Id })" class="btn default btn-outline btn-outline-light btn-sm">@Html.Raw(tag.Text.HighlightKeyWords(Model.Keyword,false))</a>
+                                    }
+                                </div>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="note note-danger" style="line-height: 30px;">
+        <p>مقاله‌ای با این برچسب پیدا نشد</p>
+    </div>
+}
+
+@*<div>
+    @Html.Partial("_pagination", paginationViewModel)
+</div>*@
+
+@section head {
+    <meta name="description" content="مقالات منتشر شده در شبکه علمی و تخصصی زیگماوب - صفحه @Model.PageIndex" />
+}
+
+@section PageBreadcrumb {
+    @*<ul class="page-breadcrumb breadcrumb">
+            <li>
+                <a href="index.html">برچسب ها</a>
+                <i class="fa fa-angle-left"></i>
+            </li>
+            <li>
+                <span>الگوریتم</span>
+            </li>
+        </ul>*@
+}
+
+@section PageHead {
+    <div class="page-head">
+        <div class="container">
+
+            <div class="page-title">
+                <h1>
+                    <span>جستجو: @Model.Keyword</span>
+                </h1>
+            </div>
+        </div>
+    </div>
+}

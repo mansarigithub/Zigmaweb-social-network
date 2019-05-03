@@ -1,0 +1,25 @@
+﻿@model ZigmaWeb.UI.Areas.User.ViewModels.Business.BusinessViewModel
+@using ZigmaWeb.UI.Infrastructure.ExtensionMethod
+@using ZigmaWeb.Common.Enum
+
+
+<div class="note note-info">
+    <h4 class="block">کسب و کار خود را در شبکه زیگماوب به صورت رایگان تبلیغ کنید!</h4>
+    <p style="line-height: 30px;">
+        شما میتوانید کسب و کار خود را به صورت رایگان در شبکه علمی و تخصصی زیگماوب تبلیغ کنید.
+        این تبلیغات در کنار مقاله‌های شما نمایش داده می‌شود.<br/>
+        در زیر متن تبلیغ خود را وارد و دکمه ثبت را کلیک نمایید.
+    </p>
+</div>
+
+<form id="introduceForm" novalidate class="validatable-form">
+    <div class="form-group form-md-line-input form-md-floating-label">
+        @Html.TextAreaFor(model => model.BusinessIntroduce.Text, new { rows = "5", @class = "form-control" })
+        @Html.LabelFor(model => model.BusinessIntroduce.Text, new { @class = "control-label" })
+        @Html.ValidationMessageFor2(model => model.BusinessIntroduce.Text)
+    </div>
+
+    <div class="margiv-top-10">
+        <button type="submit" class="btn blue">ذخیره</button>
+    </div>
+</form>

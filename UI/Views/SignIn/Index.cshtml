@@ -1,0 +1,79 @@
+﻿@model ZigmaWeb.UI.ViewModels.SignIn.SignInViewModel
+@{
+    ViewBag.Title = "ورود";
+    Layout = "~/Views/Shared/_SignInLayout.cshtml";
+}
+
+<div class="portlet light ">
+    <div class="portlet-title">
+        <div class="caption font-green-haze">
+            <i class="fa fa-user font-green-haze"></i>
+            <span class="caption-subject">برای ارسال مقاله یا ایجاد وبلاگ وارد شود</span>
+        </div>
+    </div>
+    <div class="portlet-body form">
+        <form method="post" class="form-horizontal validatable-form" action="@Url.Action()">
+            @Html.AntiForgeryToken()
+            <div class="form-body">
+                <div class="form-group form-md-line-input has-success" style="border-bottom: 0 !important">
+                    @Html.LabelFor(model => model.Email, new { @class = "col-md-3 control-label" })
+                    <div class="col-md-7">
+                        <div class="input-icon right">
+                            @Html.TextBoxFor(model => model.Email, new { @class = "form-control ltr align-left", maxlength = "50" })
+                            @Html.ValidationMessageFor2(model => model.Email)
+                            <div class="form-control-focus"> </div>
+                            @*<span class="help-block">لطفا آدرس ایمیل‌ خود را وارد کنید</span>*@
+                            <i class="fa fa-envelope"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group form-md-line-input has-success" style="border-bottom: 0 !important">
+                    @Html.LabelFor(model => model.Password, new { @class = "col-md-3 control-label" })
+                    <div class="col-md-7">
+                        <div class="input-icon right">
+                            @Html.PasswordFor(model => model.Password, new { @class = "form-control ltr align-left", maxlength = "25" })
+                            @Html.ValidationMessageFor2(model => model.Password)
+                            <div class="form-control-focus"> </div>
+                            @*<span class="help-block">لطفا یک کلمه عبور امن برای خود انتخاب کنید</span>*@
+                            <i class="fa fa-key"></i>
+                        </div>
+                    </div>
+                </div>
+                @if (!string.IsNullOrWhiteSpace(Model.ErrorMessage)) {
+                    <div class="form-group form-md-line-input">
+                        <div class="col-md-offset-4 col-md-7 font-red">
+                            @Model.ErrorMessage
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="form-actions margin-top-10">
+                <div class="row">
+                    <div class="col-md-offset-3 col-md-7">
+                        <button type="submit" class="btn blue btn-block">ثبت نام / ورود به ناحیه کاربری</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-offset-3 col-md-7">
+                        <br />
+                        <button type="button"  onClick="(function(){location.href = 'http://zigmaweb.ir'; return false;})();return false;" class="btn orange btn-block">بازگشت به صفحه اصلی</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section FooterItems {
+    <li>
+        <a href="@Url.Action("index", "passwordreset")">
+            کلمه عبورم را فراموش کرده‌ام
+        </a>
+    </li>
+}
+
+@section PageScripts {
+    <script>
+        
+    </script>
+}

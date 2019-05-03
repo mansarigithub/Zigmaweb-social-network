@@ -1,0 +1,84 @@
+﻿@using ZigmaWeb.UI.Areas.User.ViewModels.Resume
+@using ZigmaWeb.Common.Enum
+@using ZigmaWeb.Localization.ExtensionMethod
+@model ResumeViewModel
+@{
+    var yearsList = new List<SelectListItem>();
+    for (int year = 1395; year >= 1330; year--) {
+        yearsList.Add(new SelectListItem() { Text = year.ToString(), Value = year.ToString() });
+    }
+}
+<div class="row margin-bottom-20">
+    <div class="col-md-12">
+        <button id="addEducationalResumeButton" type="button" class="btn blue">افزودن</button>
+    </div>
+</div>
+
+<form id="educationalResumeForm" novalidate class="validatable-form display-hide form-horizontal" style="padding:20px; border: 1px solid #e7ecf1">
+    <div class="form-body">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group form-md-line-input">
+                    @Html.LabelFor(model => model.EducationalResume.OrganizationName, new { @class = "col-md-4 control-label" })
+                    <div class="col-md-8">
+                        @Html.TextBoxFor(model => model.EducationalResume.OrganizationName, new { @class = "form-control rtl" })
+                        @Html.ValidationMessageFor2(model => model.EducationalResume.OrganizationName)
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group form-md-line-input">
+                    @Html.LabelFor(model => model.EducationalResume.UniversityFieldName, new { @class = "col-md-4 control-label" })
+                    <div class="col-md-8">
+                        @Html.TextBoxFor(model => model.EducationalResume.UniversityFieldName, new { @class = "form-control rtl" })
+                        @Html.ValidationMessageFor2(model => model.EducationalResume.UniversityFieldName)
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group form-md-line-input">
+                    @Html.LabelFor(model => model.EducationalResume.StartYear, new { @class = "col-md-4 control-label" })
+                    <div class="col-md-8">
+                        @Html.DropDownListFor(model => model.EducationalResume.StartYear, yearsList, "", new { @class = "form-control" })
+                        @Html.ValidationMessageFor2(model => model.EducationalResume.StartYear)
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group form-md-line-input">
+                    @Html.LabelFor(model => model.EducationalResume.EndYear, new { @class = "col-md-4 control-label" })
+                    <div class="col-md-8">
+                        @Html.DropDownListFor(model => model.EducationalResume.EndYear, yearsList, "ToNow".Localize(), new { @class = "form-control" })
+                        @*@Html.ValidationMessageFor2(model => model.EducationalResume.EndYear)*@
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group form-md-line-input">
+                    @Html.LabelFor(model => model.EducationalResume.EducationGrade, new { @class = "col-md-4 control-label" })
+                    <div class="col-md-8">
+                        @Html.LocalizedEnumDropDownListFor(model => model.EducationalResume.EducationGrade, true, null, new { @class = "form-control" })
+                        @Html.ValidationMessageFor2(model => model.EducationalResume.EducationGrade)
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="margiv-top-10">
+            <button type="submit" class="btn blue">ذخیره</button>
+            <button type="button" id="cancelAddEducationalResumeButton" class="btn red-haze">لغو</button>
+        </div>
+
+    </div>
+</form>
+
+<div class="table-container">
+    <table id="educationalresumeGrid" style="width:100% !important" class="contents-grid table table-striped table-bordered table-hover table-checkable dataTable"></table>
+</div>
+

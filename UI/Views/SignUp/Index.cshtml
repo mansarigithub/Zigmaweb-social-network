@@ -1,0 +1,118 @@
+﻿@model ZigmaWeb.UI.ViewModels.SignUp.SignUpViewModel
+@{
+    Layout = "~/Views/Shared/_SignInLayout.cshtml";
+}
+<div class="portlet light ">
+    <div class="portlet-title">
+        <div class="caption font-green-haze">
+            <i class="fa fa-user-plus font-green-haze"></i>
+            <span class="caption-subject"> عضویت در زیگماوب</span>
+        </div>
+    </div>
+    <div class="portlet-body form">
+        <form method="post" class="form-horizontal validatable-form" action="@Url.Action()">
+            @Html.AntiForgeryToken()
+            <div class="form-body">
+                <div class="form-group form-md-line-input has-success" style="border-bottom: 0 !important">
+                    @Html.LabelFor(model => model.User.FirstName, new { @class = "col-md-4 control-label" })
+                    <div class="col-md-7">
+                        <div class="input-icon right">
+                            @Html.TextBoxFor(model => model.User.FirstName, new { @class = "form-control", maxlength = "25" })
+                            @Html.ValidationMessageFor2(model => model.User.FirstName)
+                            <div class="form-control-focus"> </div>
+                            <span class="help-block"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group form-md-line-input has-success" style="border-bottom: 0 !important">
+                    @Html.LabelFor(model => model.User.LastName, new { @class = "col-md-4 control-label" })
+                    <div class="col-md-7">
+                        <div class="input-icon right">
+                            @Html.TextBoxFor(model => model.User.LastName, new { @class = "form-control", maxlength = "25" })
+                            @Html.ValidationMessageFor2(model => model.User.LastName)
+                            <div class="form-control-focus"> </div>
+                            <span class="help-block"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group form-md-line-input has-success" style="border-bottom: 0 !important">
+                    @Html.LabelFor(model => model.User.Email, new { @class = "col-md-4 control-label" })
+                    <div class="col-md-7">
+                        <div class="input-icon right">
+                            @Html.TextBoxFor(model => model.User.Email, new { @class = "form-control ltr align-left", maxlength = "50" })
+                            @Html.ValidationMessageFor2(model => model.User.Email)
+                            <div class="form-control-focus"> </div>
+                            <span class="help-block">لطفا یک پست الکترونیک معتبر وارد کنید</span>
+                            <i class="fa fa-envelope"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group form-md-line-input has-success" style="border-bottom: 0 !important">
+                    @Html.LabelFor(model => model.User.Password, new { @class = "col-md-4 control-label" })
+                    <div class="col-md-7">
+                        <div class="input-icon right">
+                            @Html.PasswordFor(model => model.User.Password, new { @class = "form-control ltr align-left", maxlength = "25" })
+                            @Html.ValidationMessageFor2(model => model.User.Password)
+                            <div class="form-control-focus"> </div>
+                            <span class="help-block">لطفا یک کلمه عبور امن برای خود انتخاب کنید</span>
+                            <i class="fa fa-key"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group form-md-line-input has-success" style="border-bottom: 0 !important">
+                    @Html.LabelFor(model => model.User.PasswordConfirm, new { @class = "col-md-4 control-label", maxlength = "25" })
+                    <div class="col-md-7">
+                        <div class="input-icon right">
+                            @Html.PasswordFor(model => model.User.PasswordConfirm, new { @class = "form-control ltr align-left" })
+                            @Html.ValidationMessageFor2(model => model.User.PasswordConfirm)
+                            <div class="form-control-focus"></div>
+                            <span class="help-block">کلمه عبوری که انتخاب کرده‌اید را تکرار کنید </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group form-md-line-input has-success" style="border-bottom: 0 !important">
+                    <div class="col-md-offset-4 col-md-7">
+                        <div class="md-checkbox-list">
+                            <div class="md-checkbox">
+                                @Html.CheckBoxFor(model => model.IAcceptLicenceTerms, new { @class = "md-check" })
+                                <label for="IAcceptLicenceTerms">
+                                    <span class="inc"></span>
+                                    <span class="check"></span>
+                                    <span class="box"></span> شرایط استفاده در زیگماوب را مطالعه کرده‌ام و قبول دارم
+                                </label>
+                            </div>
+                        </div>
+                        <div class="font-red">
+                            @Html.ValidationMessageFor(model => model.IAcceptLicenceTerms)
+                        </div>
+                    </div>
+                </div>
+
+                @if (!string.IsNullOrWhiteSpace(Model.ErrorMessage)) {
+                    <div class="form-group form-md-line-input">
+                        <div class="col-md-offset-4 col-md-7 font-red">
+                            @Model.ErrorMessage
+                        </div>
+                    </div>
+                }
+
+            </div>
+            <div class="form-actions margin-top-10">
+                <div class="row">
+                    <div class="col-md-offset-4 col-md-8">
+                        <button type="submit" class="btn blue">ایجاد حساب کاربری</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section FooterItems {
+    <li>
+        <a href="@Url.Action("resendactivationcode", "signup")">
+            ارسال مجدد لینک فعال‌سازی
+        </a>
+    </li>
+}

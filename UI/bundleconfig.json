@@ -1,0 +1,8 @@
+[
+  {
+    "outputFileName": "Content/assets/global/plugins/bootstrap-typeahead/typeahead.min.js",
+    "inputFiles": [
+      "Content/assets/global/plugins/bootstrap-typeahead/typeahead.js"
+    ]
+  }
+]

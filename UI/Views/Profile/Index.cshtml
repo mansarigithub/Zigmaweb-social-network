@@ -1,0 +1,261 @@
+﻿@using ZigmaWeb.Common.ExtensionMethod
+@model ZigmaWeb.UI.ViewModels.UserHomePage.UserHomePageViewModel
+@{
+    Layout = "~/Views/Profile/ProfileLayout.cshtml";
+    ViewBag.Title = Model.UserInfo.FullName;
+}
+
+<div class="row margin-top-10">
+    <div class="col-md-8 profile-info">
+        <h1 class="font-blue-chambray">@Model.UserInfo.FullName</h1>
+        @if (!string.IsNullOrEmpty(Model.UserInfo.AboutMe)) {
+            <p>@Html.Raw(Model.UserInfo.AboutMe.Replace(System.Environment.NewLine, "<br/>"))</p>
+        }
+        <p>
+            <a href="@Model.UserInfo.WebSiteUrl" rel="nofollow" target="_blank">@Model.UserInfo.WebSiteUrl</a>
+        </p>
+        <ul class="list-inline">
+            <li title="محل زندگی">
+                <i class="fa fa-map-marker"></i> ایران
+            </li>
+            @if (Model.UserInfo.EducationalResumes.Any()) {
+                var resume = Model.UserInfo.EducationalResumes.First();
+                <li title="آخرین مقطع تحصیلی">
+                    <i class="fa fa-graduation-cap"></i>
+                    @resume.UniversityFieldName (@resume.EducationGradeString)
+                </li>
+            }
+            @if (Model.UserInfo.JobResumes.Any()) {
+                var resume = Model.UserInfo.JobResumes.First();
+                <li title="شغل/محل کار">
+                    <i class="fa fa-sitemap"></i>
+                    @resume.JobName (@resume.OrganizationName)
+                </li>
+            }
+            <li title="تاریخ عضویت">
+                <i class="fa fa-calendar"></i>
+                <span class="number-fa">@Model.UserInfo.RegistrationDateString</span>
+            </li>
+
+            @*<li>
+                    <i class="fa fa-calendar"></i> 18 Jan 1982
+                </li>
+                <li>
+                    <i class="fa fa-briefcase"></i> Design
+                </li>
+                <li>
+                    <i class="fa fa-star"></i> Top Seller
+                </li>
+                <li>
+                    <i class="fa fa-heart"></i> BASE Jumping
+                </li>*@
+        </ul>
+    </div>
+    <!--end col-md-8-->
+    <div class="col-md-4">
+        <div class="portlet sale-summary">
+            <div class="portlet-title">
+                <div class="caption font-blue-chambray">فعالیت‌ها</div>
+            </div>
+            <div class="portlet-body">
+                <ul class="list-unstyled">
+                    <li>
+                        <span class="sale-info">
+                            <a href="#articles">مقاله‌ها</a>
+                            <i class="fa fa-img-up"></i>
+                        </span>
+                        <span class="sale-num number-fa">@Model.UserInfo.TotalArticles</span>
+                    </li>
+                    <li>
+                        <span class="sale-info">
+                            <a href="@(Model.UserInfo.WeblogName != null ? "/" + Model.UserInfo.WeblogName : "")">پست‌ها</a>
+                            <i class="fa fa-img-down"></i>
+                        </span>
+                        <span class="sale-num  number-fa">@Model.UserInfo.TotalBlogPosts</span>
+                    </li>
+                    <li>
+                        <span class="sale-info">
+                            <a>دنبال کنندگان</a>
+                            <i class="fa fa-img-down"></i>
+                        </span>
+                        <span class="sale-num  number-fa">@Model.UserInfo.Followers</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!--end col-md-4-->
+</div>
+
+@if (Model.UserInfo.EducationalResumes.Any()) {
+    <div class="row">
+        <div class="col-md-12">
+            <div class="portlet">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="icon-graduation font-blue-chambray"></i>
+                        <span class="caption-subject font-blue-chambray">سوابق تحصیلی</span>
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <ul class="feeds">
+                        @foreach (var resume in Model.UserInfo.EducationalResumes) {
+                            <li>
+                                <a>
+                                    <div class="col1">
+                                        <div class="cont">
+                                            <div class="cont-col1">
+                                                <div class="label label-info">
+                                                    <i class="fa fa-graduation-cap"></i>
+                                                </div>
+                                            </div>
+                                            <div class="cont-col2">
+                                                <div class="desc">
+                                                    مقطع @resume.EducationGradeString، @resume.OrganizationName، @resume.UniversityFieldName
+                                                    @if (resume.StartYear.HasValue && resume.EndYear.HasValue) {
+                                                        <span class="number-fa">(@resume.StartYear تا @resume.EndYear)</span>
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @*<div class="col2">
+                                            <div class="date font-blue-chambray number-fa">@resume.UniversityFieldName</div>
+                                        </div>*@
+                                </a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@if (Model.UserInfo.JobResumes.Any()) {
+    <div class="row">
+        <div class="col-md-12">
+            <div class="portlet">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="icon-organization font-blue-chambray"></i>
+                        <span class="caption-subject font-blue-chambray">سوابق کاری</span>
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <ul class="feeds">
+                        @foreach (var resume in Model.UserInfo.JobResumes) {
+                            <li>
+                                <a>
+                                    <div class="col1">
+                                        <div class="cont">
+                                            <div class="cont-col1">
+                                                <div class="label label-info">
+                                                    <i class="fa fa-building-o"></i>
+                                                </div>
+                                            </div>
+                                            <div class="cont-col2">
+                                                <div class="desc">
+                                                    @resume.OrganizationName، @resume.JobName
+                                                    @if (resume.StartYear.HasValue && resume.EndYear.HasValue) {
+                                                        <span>(@resume.StartYear تا @resume.EndYear)</span>
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @*<div class="col2">
+                                            <div class="date font-blue-chambray number-fa">@resume.UniversityFieldName</div>
+                                        </div>*@
+                                </a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@if (Model.UserInfo.LatestArticles.Any()) {
+    <div class="row">
+        <div class="col-md-12">
+            <div class="portlet" id="articles">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="icon-docs"></i>
+                        <span class="caption-subject">مقالات</span>
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <ul class="feeds">
+                        @foreach (var article in Model.UserInfo.LatestArticles) {
+                            <li>
+                                <a href="/article/@article.Id">
+                                    <div class="col1">
+                                        <div class="cont">
+                                            <div class="cont-col2">
+                                                <div class="desc margin-right-0">@article.Title</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col2">
+                                        <div class="date font-blue-chambray number-fa">@article.CreateDateString</div>
+                                    </div>
+                                </a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@if (Model.UserInfo.LatestBlogPosts.Any()) {
+    <div class="row">
+        <div class="col-md-12">
+            <div class="portlet">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="icon-note font-blue-chambray"></i>
+                        <span class="caption-subject font-blue-chambray">آخرین پست‌های وبلاگ</span>
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <ul class="feeds">
+                        @foreach (var post in Model.UserInfo.LatestBlogPosts) {
+                            <li>
+                                <a href="/@Model.UserInfo.WeblogName/post/@post.Id">
+                                    <div class="col1">
+                                        <div class="cont">
+                                            <div class="cont-col2">
+                                                <div class="desc margin-right-0">@post.Title</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col2">
+                                        <div class="date font-blue-chambray number-fa">@post.CreateDateString</div>
+                                    </div>
+                                </a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section head {
+    <meta name="description" content="@(string.IsNullOrWhiteSpace(Model.UserInfo.AboutMe) ?  Model.UserInfo.FullName : Model.UserInfo.AboutMe.MakeShort(155))" />
+    <link href="~/content/assets/pages/css/visitor_profile_index.css" rel="stylesheet" />
+}
+
+@section PageScripts {
+    <script src="~/Content/assets/pages/scripts/visitor_profile.js"></script>
+    <script src="~/Content/assets/global/plugins/botbox/bootbox.min.js"></script>
+}
+
+@section ComponentScripts {
+}

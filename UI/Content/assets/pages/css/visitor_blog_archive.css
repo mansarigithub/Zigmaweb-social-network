@@ -1,0 +1,12 @@
+.post-title {
+    display: inline;
+}
+.post-date {
+    font-size: 1em;
+    margin-right: 20px;
+    color:#105831;
+    float:left;
+}
+.mt-list-item {
+    line-height:2em;
+}

@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7EC61AAF-0AC3-4B2B-ADA6-1ED75577E954}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ZigmaWeb.PresentationModel</RootNamespace>
+    <AssemblyName>ZigmaWeb.PresentationModel</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ModelContainer\Blog\BlogHomePageModelContainer.cs" />
+    <Compile Include="ModelContainer\DashboardModelContainer.cs" />
+    <Compile Include="ModelContainer\UserInfoForHomePageModelContainer.cs" />
+    <Compile Include="ModelContainer\ViewBlogArchiveModelContainer.cs" />
+    <Compile Include="ModelContainer\ViewBlogPostModelContainer.cs" />
+    <Compile Include="ModelContainer\ViewArticleModelContainer.cs" />
+    <Compile Include="ModelContainer\AdminDashboardModelContainer.cs" />
+    <Compile Include="ModelContainer\VisitorHomePageModelContainer.cs" />
+    <Compile Include="Model\Archive\ContentArchiveItemPM.cs" />
+    <Compile Include="Model\Blog\BlogInfoForGenerateLinkPM.cs" />
+    <Compile Include="Model\Blog\ShortBlogInfoPM.cs" />
+    <Compile Include="Model\Blog\BlogLinkPM.cs" />
+    <Compile Include="Model\Blog\BlogInfoPM.cs" />
+    <Compile Include="Model\Business\BusinessIntroducePM.cs" />
+    <Compile Include="Model\Message\MessagePM.cs" />
+    <Compile Include="Model\Content\ContentForViewByVisitorPM.cs" />
+    <Compile Include="Model\Job\JobPM.cs" />
+    <Compile Include="Model\JobResume\JobResumePM.cs" />
+    <Compile Include="Model\Notification\NotificationPM.cs" />
+    <Compile Include="Model\Organization\OrganizationPM.cs" />
+    <Compile Include="Model\EducationalResume\EducationalResumePM.cs" />
+    <Compile Include="Model\SetupBlog\BlogGeneralSettingsPM.cs" />
+    <Compile Include="Model\Comment\CommentRegistrationPM.cs" />
+    <Compile Include="Model\Content\AdminDashboardNewArticlePm.cs" />
+    <Compile Include="Model\Content\AdminDashboardNewUserPm.cs" />
+    <Compile Include="Model\Content\ContentInfo2PM.cs" />
+    <Compile Include="Model\Content\ContentInfo4PM.cs" />
+    <Compile Include="Model\Content\ContentInfo3PM.cs" />
+    <Compile Include="Model\Content\ContentInfoWithTextPM.cs" />
+    <Compile Include="Model\Profile\ProfileSocialNetworkLinksPM.cs" />
+    <Compile Include="Model\Profile\ProfileStatisticsAndSocialLinksPM.cs" />
+    <Compile Include="Model\Profile\ProfileImageCropInfoPM.cs" />
+    <Compile Include="Model\Profile\ProfileChangePasswordPM.cs" />
+    <Compile Include="Model\Profile\ProfileGeneralSettingsPM.cs" />
+    <Compile Include="Model\Media\MediaPM.cs" />
+    <Compile Include="Model\UniversityFieldName\UniversityFieldPM.cs" />
+    <Compile Include="Model\User\UserInfoPm.cs" />
+    <Compile Include="Model\Content\ContentInfo1PM.cs" />
+    <Compile Include="Model\Content\ContentInfo6PM.cs" />
+    <Compile Include="Model\Content\ContentInfo5PM.cs" />
+    <Compile Include="Model\Comment\CommentInfoPM.cs" />
+    <Compile Include="Model\Profile\ProfileForViewByVisitorPM.cs" />
+    <Compile Include="Model\Tag\TagPM.cs" />
+    <Compile Include="Model\Content\ContentRegistrationPM.cs" />
+    <Compile Include="Model\User\UserRegistrationPM.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{C2F71BB8-4BCF-4696-A1D3-E9E7E027691B}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Localization\Localization.csproj">
+      <Project>{0cf0906f-a307-4285-a830-196d553810ef}</Project>
+      <Name>Localization</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Validation\Validation.csproj">
+      <Project>{4b753781-43c8-41fd-bdd2-21034a376367}</Project>
+      <Name>Validation</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

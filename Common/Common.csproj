@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{C2F71BB8-4BCF-4696-A1D3-E9E7E027691B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ZigmaWeb.Common</RootNamespace>
+    <AssemblyName>ZigmaWeb.Common</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="HtmlAgilityPack">
+      <HintPath>..\..\..\ThirdParty\HtmlAgilityPack.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Configuration\AppDirectoryManager.cs" />
+    <Compile Include="Configuration\AppFileManager.cs" />
+    <Compile Include="Configuration\AppConfigurationManager.cs" />
+    <Compile Include="DataProvider\ChartDataHelper.cs" />
+    <Compile Include="DataProvider\HtmlParser.cs" />
+    <Compile Include="DataProvider\IChartDatacs.cs" />
+    <Compile Include="Data\ChartData.cs" />
+    <Compile Include="Data\DataSourceResult.cs" />
+    <Compile Include="Data\DataSourceRequest.cs" />
+    <Compile Include="Drawing\ImageHelper.cs" />
+    <Compile Include="Enum.cs" />
+    <Compile Include="Enum\MediaType.cs" />
+    <Compile Include="Enum\EducationGrade.cs" />
+    <Compile Include="Enum\OrganizationType.cs" />
+    <Compile Include="Enum\PushNotificationType.cs" />
+    <Compile Include="Enum\NotificationType.cs" />
+    <Compile Include="Enum\ForbiddenIdentifierContext.cs" />
+    <Compile Include="Enum\ProfileImageSize.cs" />
+    <Compile Include="Enum\ProfileKeyValueType.cs" />
+    <Compile Include="Enum\CommentStatus.cs" />
+    <Compile Include="Enum\ContentState.cs" />
+    <Compile Include="Enum\ContentType.cs" />
+    <Compile Include="Enum\SessionKeys.cs" />
+    <Compile Include="Enum\PublicationType.cs" />
+    <Compile Include="Enum\Sexuality.cs" />
+    <Compile Include="Exception\PageNotFoundException.cs" />
+    <Compile Include="Exception\BusinessExceptionReasone.cs" />
+    <Compile Include="Exception\BusinessException.cs" />
+    <Compile Include="ExtensionMethod\HtmlExtention.cs" />
+    <Compile Include="ExtensionMethod\StringExtention.cs" />
+    <Compile Include="ExtensionMethod\StreamExtention.cs" />
+    <Compile Include="ExtensionMethod\ImageExtention.cs" />
+    <Compile Include="ExtensionMethod\CollectionExtention.cs" />
+    <Compile Include="ExtensionMethod\ByteArrayExtention.cs" />
+    <Compile Include="ExtensionMethod\IQueryableExtension.cs" />
+    <Compile Include="ExtensionMethod\EnumerableExtention.cs" />
+    <Compile Include="Globalization\DateTimeExtension.cs" />
+    <Compile Include="Globalization\PersianCalendarHelper.cs" />
+    <Compile Include="IO\MimeHelper.cs" />
+    <Compile Include="Loggers\AppLogger.cs" />
+    <Compile Include="Messaging\EmailHelper.cs" />
+    <Compile Include="PushNotification\IPushNotificationProvider.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Messaging\SMS.cs" />
+    <Compile Include="Web\HtmlMinifier.cs" />
+    <Compile Include="Web\UriExtension.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Text\" />
+    <Folder Include="Web\Mvc\Attributes\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Localization\Localization.csproj">
+      <Project>{0cf0906f-a307-4285-a830-196d553810ef}</Project>
+      <Name>Localization</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="Resources\UserRegistrationVerificationEmailTemplate.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PasswordResetEmailTemplate.txt" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

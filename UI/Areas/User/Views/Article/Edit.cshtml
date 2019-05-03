@@ -1,0 +1,149 @@
+﻿@model ZigmaWeb.UI.Areas.User.ViewModels.Article.EditArticleViewModel
+@using ZigmaWeb.UI.Infrastructure.ExtensionMethod
+
+@{
+    ViewBag.Title = "ویرایش مقاله";
+    var tags = string.Join(",", Model.Tags);
+}
+
+@Html.Partial("_ZwMediaBrowserPopup")
+
+<form id="contentForm" novalidate class="validatable-form">
+    @Html.HiddenFor(model => model.Content.Id)
+    <div class="form-body">
+        <div class="row">
+            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                <div class="portlet light bordered">
+                    <div class="portlet-body form" style="display: block;">
+                        <div class="form-group form-md-line-input form-md-floating-label">
+                            @Html.TextBoxFor(model => model.Content.Title, new { @class = "form-control contentTitle" })
+                            @Html.ValidationMessageFor2(model => model.Content.Title)
+                            @Html.LabelFor(model => model.Content.Title)
+                        </div>
+                        <div class="form-group form-md-line-input form-md-floating-label">
+                            @Html.TextBoxFor(model => model.Content.ShortAbstract, new { @class = "form-control contentShortAbstract", maxlength = 250 })
+                            @Html.LabelFor(model => model.Content.ShortAbstract)
+                        </div>
+                    </div>
+                </div>
+
+                @Html.TextAreaFor(model => model.Content.Text, new { id = "contentText", name = "contentText" })
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                <div class="portlet light bordered">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="icon-equalizer font-blue-hoki"></i>
+                            <span class="caption-subject font-blue-hoki bold">انتشار</span>
+                            @*<span class="caption-helper">demo form...</span>*@
+                        </div>
+                        <div class="tools">
+                            <a href="" class="collapse" data-original-title="" title=""> </a>
+                        </div>
+                    </div>
+                    <div class="portlet-body form form-horizontal" style="display: block;">
+                        <div class="form-body">
+                            <div class="form-group">
+                                <label class="col-md-6 control-label right">منتشر شود</label>
+                                <div class="col-md-6">
+                                    @Html.CheckBoxFor(model => model.Content.Published, new { @class = "form-control switch-control" })
+                                    @*<span class="help-block"> A block of help text. </span>*@
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="portlet light bordered">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="icon-picture font-blue-hoki"></i>
+                            <span class="caption-subject font-blue-hoki bold">افزودن تصویر</span>
+                            @*<span class="caption-helper">demo form...</span>*@
+                        </div>
+                        <div class="tools">
+                            <a href="" class="collapse" data-original-title="" title=""> </a>
+                        </div>
+                    </div>
+                    <div class="portlet-body form form-horizontal" style="display: block;">
+                        <div class="form-body">
+                            @Html.Partial("_Storage")
+                            <button type="button" id="chooseImageBtn" class="btn btn-default">انتخاب از گالری تصاویر</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portlet light bordered">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="icon-tag font-blue-hoki"></i>
+                            <span class="caption-subject font-blue-hoki bold">برچسب‌ها</span>
+                            @*<span class="caption-helper">demo form...</span>*@
+                        </div>
+                        <div class="tools">
+                            <a href="" class="collapse" data-original-title="" title=""> </a>
+                        </div>
+                    </div>
+                    <div class="portlet-body form" style="display: block;">
+                        <input id="tags" type="text" value="@tags" style="width: 100%" />
+                        <div>
+                            <i class="info">* بعد از وارد کردن هر <a target="_blank" href="~/faq#tag">برچسب</a> کلید Enter را فشار دهید</i>
+                          <br /><br />
+                            <i class="info">* برای دسته بندی مقاله از یک کلمه (مثل:کامپیوتر، مکانیک، الکترونیک، تاریخ، جغرافیا، کشاورزی و...) به عنوان دسته بندی کلی استفاده کنید</i>
+                            <br /><br />
+                                                   <i class="info">* مقاله هایی که بیشترین برچسب مشترک را با مقاله نمایش داده شده داشته باشند در قسمت مقاله های مرتبط نمایش داده خواهند شد <a target="_blank" href="~/faq#tag">اطلاعات بیشتر...</a> </i>
+                        </div>
+                    </div>
+
+                    <div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section PageBreadcrumb{
+    <li>
+        <i class="icon-home"></i>
+        <a href="@Url.Action("index")">مقالات</a>
+        <i class="fa fa-angle-left"></i>
+    </li>
+    <li>
+        <span>مقاله</span>
+    </li>
+}
+
+@section PageActionsMenu{
+    <button type="button" class="btn btn-fit-height gray-salt preview-button" onclick="zw.page.onPreviewClick()">
+        پیش نمایش
+    </button>
+    <button type="button" class="btn btn-fit-height gray-salt save-button" onclick="zw.page.onSaveClick()">
+        ذخیره
+    </button>
+}
+
+
+@section ComponentScripts{
+    <script src="~/content/assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
+    <script src="~/scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/scripts/jquery.validate.min.js"></script>
+    <script src="~/scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/scripts/ckeditor/ckeditor.js"></script>
+    <script src="~/Content/assets/global/plugins/bootstrap-tagsinput/bootstrap-tagsinput.min.js"></script>
+    <script src="~/Content/assets/global/plugins/dropzonejs/dropzonejs.min.js"></script>
+    <script src="~/Content/assets/global/scripts/storage.js"></script>
+}
+
+@section PageScripts{
+    <script src="~/content/assets/pages/scripts/user_article_edit.js"></script>
+}
+
+@section Head{
+    <link href="~/content/assets/pages/css/user_article_add.css" rel="stylesheet" />
+    <link href="~/Content/assets/global/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css" rel="stylesheet" />
+    <link href="~/content/assets/global/plugins/bootstrap-toastr/toastr-rtl.min.css" rel="stylesheet" />
+    <link href="~/content/assets/global/plugins/bootstrap-switch/css/bootstrap-switch-rtl.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/assets/global/css/storage.css" rel="stylesheet" />
+}
+

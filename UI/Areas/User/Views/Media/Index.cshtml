@@ -1,0 +1,39 @@
+﻿@{
+    ViewBag.Title = "مدیریت فایل‌های چندرسانه‌ای";
+}
+
+<div class="bg-white" style="padding:10px">
+    @Html.Partial("_ZwMediaBrowser")
+</div>
+
+@section PageBreadcrumb{
+    <li>
+        <i class="icon-home"></i>
+        <a href="@Url.Action("index")">حساب کاربری</a>
+        <i class="fa fa-angle-left"></i>
+    </li>
+    <li>
+        <span>مدیریت فایل‌های چندرسانه‌ای</span>
+    </li>
+}
+
+@section PageActionsMenu{
+    <button type="button" class="btn btn-fit-height gray-salt font-red-haze delete-comments">
+        <i class="fa fa-trash-o"></i>
+        حذف
+    </button>
+}
+
+@section ComponentScripts {
+    <script src="~/Content/assets/global/scripts/storage.js"></script>
+}
+
+@section PageScripts {
+    <script src="~/content/assets/pages/scripts/user_media_index.js"></script>
+
+
+}
+
+@section Head {
+    <link href="~/Content/assets/global/css/storage.css" rel="stylesheet" />
+}

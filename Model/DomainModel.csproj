@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{6498D241-3E3F-463C-89D2-F9D62AE78297}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ZigmaWeb.Model</RootNamespace>
+    <AssemblyName>ZigmaWeb.Model</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Domain\Core\BlogLink.cs" />
+    <Compile Include="Domain\Core\Channel.cs" />
+    <Compile Include="Domain\Core\Blog.cs" />
+    <Compile Include="Domain\Core\FeaturedContent.cs" />
+    <Compile Include="Domain\Core\Message.cs" />
+    <Compile Include="Domain\Core\Media.cs" />
+    <Compile Include="Domain\Core\Job.cs" />
+    <Compile Include="Domain\Core\JobResume.cs" />
+    <Compile Include="Domain\Core\UniversityField.cs" />
+    <Compile Include="Domain\Core\EducationalResume.cs" />
+    <Compile Include="Domain\Core\Organization.cs" />
+    <Compile Include="Domain\Core\Notification.cs" />
+    <Compile Include="Domain\Core\Publication.cs" />
+    <Compile Include="Domain\Core\ExceptionLog.cs" />
+    <Compile Include="Domain\Core\Rate.cs" />
+    <Compile Include="Domain\Core\Location.cs" />
+    <Compile Include="Domain\Core\Comment.cs" />
+    <Compile Include="Domain\Core\ProfileKeyValue.cs" />
+    <Compile Include="Domain\Core\Tag.cs" />
+    <Compile Include="Domain\Core\Follower.cs" />
+    <Compile Include="Domain\Core\Visit.cs" />
+    <Compile Include="Domain\Core\Content.cs" />
+    <Compile Include="Domain\Core\ForbiddenIdentifier.cs" />
+    <Compile Include="Domain\Core\Membership.cs" />
+    <Compile Include="Domain\Core\Role.cs" />
+    <Compile Include="Domain\Core\Reference.cs" />
+    <Compile Include="Domain\Core\User.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{c2f71bb8-4bcf-4696-a1d3-e9e7e027691b}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

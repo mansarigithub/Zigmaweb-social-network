@@ -1,0 +1,58 @@
+﻿@model ZigmaWeb.UI.Areas.User.ViewModels.SetupBlog.SetupBlogViewModel
+@using ZigmaWeb.UI.Infrastructure.ExtensionMethod
+@{
+}
+
+<div class="portlet light ">
+    <div class="portlet-title">
+        <div class="caption font-green-haze">
+            <i class="icon-flag font-green-haze"></i>
+            <span class="caption-subject">وبلاگ ایجاد شد</span>
+        </div>
+    </div>
+    <div class="portlet-body">
+        <div style="margin:0 10px">
+            <div class="note note-danger" style="line-height: 30px;">
+                وبلاگ شما با موفقیت ایجاد شد.<br />
+                اکنون می توانید اولین مطلب خود را در وبلاگتان منتشر کنید
+            </div>
+            <div style="padding-top:20px">
+                <a class="btn font-white bg-blue" href="@Url.Action("add", "blog")">ارسال اولین پست</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section ComponentScripts{
+    @*<script src="~/Content/assets/global/plugins/bootstrap-toastr/toastr.min.js"></script>*@
+}
+
+@section PageScripts{
+    @*<script src="~/Content/assets/pages/scripts/user_setupblog_index.js"></script>*@
+}
+
+@section PageBreadcrumb{
+    <li>
+        <i class="icon-home"></i>
+        <a href="@Url.Action("index", "blog")">وبلاگ</a>
+        <i class="fa fa-angle-left"></i>
+    </li>
+    <li>
+        <span>ایجاد وبلاگ</span>
+    </li>
+}
+
+@section PageActionsMenu{
+
+}
+
+@section Head {
+    <link href="~/content/assets/global/plugins/bootstrap-toastr/toastr-rtl.min.css" rel="stylesheet" />
+
+    <style>
+        .form-group.form-md-line-input .form-control.edited:not([readonly]) ~ .help-block-error {
+            opacity: 1 !important;
+        }
+    </style>
+}

@@ -1,0 +1,47 @@
+﻿@model ZigmaWeb.UI.ViewModels.Blog.BlogArchiveViewModel
+@using ZigmaWeb.Common.Globalization
+
+@{
+    Layout = "_BlogLayout.cshtml";
+    ViewBag.Title = "آرشیو مطالب";
+    ViewBag.Publication = Model;
+}
+
+<div class="portlet light ">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="icon-note font-dark"></i>
+            <span class="caption-subject font-dark bold uppercase">آرشیو مطالب</span>
+            @if (Model.Year.HasValue && Model.Month.HasValue) {
+                <span class="caption-helper">(@PersianCalendarHelper.GetMonthName(Model.Month.Value) @Model.Year.Value)</span>
+            }
+        </div>
+    </div>
+    <div class="portlet-body">
+        <div class="mt-element-list">
+            <div class="mt-list-container list-news article-info">
+                <ul>
+                    @foreach (var post in Model.PostTitles) {
+                        <li class="mt-list-item">
+                            <div class="list-item-content">
+                                <a href="/@Model.Name/post/@post.Id">
+                                    <h5 class="post-title">
+                                        @post.Title
+                                    </h5>
+                                </a>
+                                <span class="post-date number-fa">@post.CreateDateString</span>
+                            </div>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section head {
+    <meta name="description" content="@string.Format("آرشیو مطالب وبلاگ {0}", Model.Title)" />
+    <link href="~/Content/assets/pages/css/visitor_blog_archive.css" rel="stylesheet" />
+}
+
+

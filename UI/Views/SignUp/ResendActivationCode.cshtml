@@ -1,0 +1,55 @@
+﻿@model ZigmaWeb.UI.ViewModels.SignUp.ResendActivationCodeViewModel
+@{
+    Layout = "~/Views/Shared/_SignInLayout.cshtml";
+}
+<div class="portlet light ">
+    <div class="portlet-title">
+        <div class="caption font-green-haze">
+            <i class="icon-settings font-green-haze"></i>
+            <span class="caption-subject">ارسال مجدد لینک فعال‌سازی</span>
+        </div>
+    </div>
+    <div class="portlet-body form">
+        <form role="form" method="post" class="form-horizontal validatable-form">
+            @Html.AntiForgeryToken()
+            <div class="form-body">
+                <div class="form-group form-md-line-input">
+                    <div class="col-md-12 font-red">
+                        <div class="note note-danger" style="line-height: 30px;">
+                            <p>اگر ایمیل فعال‌سازی حساب کاربری را دریافت نکرده‌اید،آدرس پست الکترونیکی که با آن حساب کاربری کرده‌اید را در جعبه متن زیر وارد کنید. لینک فعال سازی حساب کاربری به آدرس شما ارسال خواهد شد.</p><br />
+                            @Html.Partial("_HowToCheckEmailGuide")
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group form-md-line-input has-success" style="border-bottom: 0 !important">
+                    <div class="col-md-4 text-right">
+                        @Html.LabelFor(model => model.Email, new { @class = "control-label" })
+                    </div>
+                    <div class="col-md-7">
+                        <div class="input-icon right">
+                            @Html.TextBoxFor(model => model.Email, new { @class = "form-control" })
+                            @Html.ValidationMessageFor2(model => model.Email)
+                            <div class="form-control-focus"> </div>
+                            <span class="help-block">لطفا یک پست الکترونیک معتبر وارد کنید</span>
+                            <i class="fa fa-envelope"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-actions margin-top-10">
+                <div class="row">
+                    <div class="col-md-offset-2 col-md-10">
+                        <button type="submit" class="btn blue">ارسال لینک فعال‌سازی</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@if (Model.ShowSuccessMessage) {
+    <div class="alert alert-info" style="margin:20px 10px 0 10px">
+        اگر پست الکترونیک وارد شده در زیگماوب ثبت شده باشد، لینک فعال‌سازی حساب کاربری به آن آدرس ارسال می‌شود
+    </div>
+}

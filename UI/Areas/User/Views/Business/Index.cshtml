@@ -1,0 +1,69 @@
+﻿@model ZigmaWeb.UI.Areas.User.ViewModels.Business.BusinessViewModel
+@using ZigmaWeb.UI.Infrastructure.ExtensionMethod
+@{
+    Layout = "~/Areas/User/Views/Shared/_ProfilePartialLayout.cshtml";
+    ViewBag.Title = "کسب و کار";
+    ViewBag.ActiveNav = "Business";
+    ViewBag.ProfileStatisticsAndSocialLinks = Model.ProfileStatisticsAndSocialLinks;
+}
+
+<div class="portlet light">
+    <div class="portlet-title tabbable-line">
+        <div class="caption caption-md">
+            <i class="icon-globe theme-font hide"></i>
+            <span class="caption-subject font-blue-madison">کسب و کار</span>
+        </div>
+        <ul class="nav nav-tabs">
+            <li class="active">
+                <a href="#tab_1_1" data-toggle="tab" aria-expanded="true">معرفی کسب و کار</a>
+            </li>
+            @*<li class="">
+                <a href="#tab_1_2" data-toggle="tab" aria-expanded="false">شبکه‌های اجتماعی</a>
+            </li>
+            <li class="">
+                <a href="#tab_1_3" data-toggle="tab" aria-expanded="false">تصویر پروفایل</a>
+            </li>
+            <li>
+                <a href="#tab_1_4" data-toggle="tab" aria-expanded="false">کلمه عبور</a>
+            </li>*@
+        </ul>
+    </div>
+    <div class="portlet-body form">
+        <div class="tab-content">
+            <div class="tab-pane active" id="tab_1_1">
+                @Html.Partial("_Introduce", Model)
+            </div>
+        </div>
+    </div>
+</div>
+
+@section ComponentScripts{
+    <script src="~/content/assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
+    <script src="~/scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/scripts/jquery.validate.min.js"></script>
+    <script src="~/scripts/jquery.validate.unobtrusive.min.js"></script>
+}
+@section PageScripts{
+    <script src="~/Content/assets/pages/scripts/user_bussiness_index.js"></script>
+}
+@section PageBreadcrumb{
+    <li>
+        <span>تخصص‌ و کسب‌وکار</span>
+        <i class="fa fa-angle-left"></i>
+    </li>
+    <li>
+        <span>کسب و کار</span>
+    </li>
+}
+@section PageActionsMenu{
+
+}
+@section Head {
+    @*<link href="~/Content/assets/pages/css/user_profilesettings.css" rel="stylesheet" />*@
+
+    <style>
+        .form-group.form-md-line-input .form-control.edited:not([readonly]) ~ .help-block-error {
+            opacity: 1 !important;
+        }
+    </style>
+}

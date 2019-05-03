@@ -1,0 +1,270 @@
+﻿@model ZigmaWeb.UI.Areas.User.ViewModels.AdminDashboard.AdminDashboardViewModel
+
+@{
+    ViewBag.Title = "داشبورد مدیریت";
+}
+
+<div class="row">
+    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <a class="dashboard-stat dashboard-stat-v2 blue" href="#">
+            <div class="visual">
+                <i class="fa fa-users"></i>
+            </div>
+            <div class="details">
+                <div class="number">
+                    <span data-counter="counterup" data-value="@Model.TotalUsersCount"></span>
+                </div>
+                <div class="desc"> تعداد کاربران </div>
+            </div>
+        </a>
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <a class="dashboard-stat dashboard-stat-v2 red" href="#">
+            <div class="visual">
+                <i class="fa fa-files-o" ></i>
+            </div>
+            <div class="details">
+                <div class="number">
+                    <span data-counter="counterup" data-value="@Model.TotalArticlesCount"></span>
+                </div>
+                <div class="desc"> تعداد کل مقالات </div>
+            </div>
+        </a>
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <a class="dashboard-stat dashboard-stat-v2 green" href="#">
+            <div class="visual">
+                <i class="fa fa-file-text"></i>
+            </div>
+            <div class="details">
+                <div class="number">
+                    <span data-counter="counterup" data-value="@Model.TotalBlogPostCount"></span>
+                </div>
+                <div class="desc">تعداد بلاگ پست ها </div>
+            </div>
+        </a>
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <a class="dashboard-stat dashboard-stat-v2 purple" href="#">
+            <div class="visual">
+                <i class="fa fa-eye"></i>
+            </div>
+            <div class="details">
+                <div class="number">
+                    <span data-counter="counterup" data-value="@Model.TodayVisitsCount"></span>
+                </div>
+                <div class="desc"> تعداد بازدید امروز </div>
+            </div>
+        </a>
+    </div>
+</div>
+
+<div class="clearfix"></div>
+
+<div class="row">
+    <div class="col-md-12 col-sm-12">
+        <!-- BEGIN PORTLET-->
+        <div class="portlet light ">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-bar-chart font-dark hide"></i>
+                    <span class="caption-subject font-dark bold uppercase">نمودار بازدید کل</span>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="display-block">
+                    <div id="site-visits-chart-div" class="chart chart-div" style="padding: 0px; position: relative;">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END PORTLET-->
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6 col-sm-6">
+        <div class="portlet light ">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-bubble font-dark hide"></i>
+                    <span class="caption-subject font-hide bold uppercase">کاربران جدید</span>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="row">
+                    @foreach (var user in Model.NewUsers)
+                    {
+                        <div class="col-md-4">
+                            <!--begin: widget 1-1 -->
+                            <div class="mt-widget-1">
+                                <div class="mt-img">
+                                    <img alt="@user.FullName" src="@Url.RouteUrl("V-GetProfileImage", new { userId = user.Id, imageSize = "medium"})" class="medium-img">
+                                </div>
+                                <div class="mt-body">
+                                    <h3 class="mt-username">@user.FullName</h3>
+                                    <p class="mt-user-title"> </p>
+                                    <div class="mt-stats">
+                                        <div class="btn-group btn-group btn-group-justified">
+
+                                            <a href="javascript:;" class="btn font-green">
+                                                مشاهده پروفایل
+                                            </a>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--end: widget 1-1 -->
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-md-6 col-sm-6">
+        <div class="portlet light portlet-fit ">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-microphone font-dark hide"></i>
+                    <span class="caption-subject bold font-dark uppercase"> مقالات جدید</span>
+
+                </div>
+
+            </div>
+            <div class="portlet-body">
+                <div class="row">
+                    @{
+                        int i = 0;
+                        foreach (var article in Model.NewArticles)
+                        {
+                            var backColores = new string[] { "bg-purple-opacity", "bg-green-opacity", "bg-dark-opacity" };
+                            <div class="col-md-4">
+                                <div class="mt-widget-4">
+
+                                    <div class="mt-container @backColores[i++]">
+                                        <div class="mt-head-title">@article.Title</div>
+                                        <!-- <div class="mt-body-icons">
+                                            <a href="#">
+                                                <i class="icon-pencil"></i>
+                                            </a>
+                                            <a href="#">
+                                                <i class="icon-map"></i>
+                                            </a>
+                                            <a href="#">
+                                                <i class="icon-trash"></i>
+                                            </a>
+                                        </div>
+                                        -->
+                                        <div class="mt-img center">
+                                            <img alt="@article.AuthorFullName" src="@Url.RouteUrl("V-GetProfileImage", new { userId = article.AuthorId, imageSize = "medium"})" class="medium-img">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12 col-sm-12">
+        <!-- BEGIN PORTLET-->
+        <div class="portlet light ">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-bar-chart font-dark hide"></i>
+                    <span class="caption-subject font-dark bold uppercase">نمودار رشد کاربران</span>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div id="site_statistics_content" class="display-block">
+                    <div id="site-user-registration-chart-div" class="chart chart-div" style="padding: 0px; position: relative;">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END PORTLET-->
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12 col-sm-12">
+        <!-- BEGIN PORTLET-->
+        <div class="portlet light ">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-bar-chart font-dark hide"></i>
+                    <span class="caption-subject font-dark bold uppercase">نمودار رشد مقالات</span>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div  class="display-block">
+                    <div id="site-article-publish-chart-div" class="chart chart-div" style="padding: 0px; position: relative;">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END PORTLET-->
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12 col-sm-12">
+        <!-- BEGIN PORTLET-->
+        <div class="portlet light ">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-bar-chart font-dark hide"></i>
+                    <span class="caption-subject font-dark bold uppercase">نمودار رشد بلاگ پست ها</span>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="display-block">
+                    <div id="site-blogpost-publish-chart-div" class="chart chart-div" style="padding: 0px; position: relative;">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END PORTLET-->
+    </div>
+</div>
+
+@section PageBreadcrumb{
+    <li>
+        <i class="icon-home"></i>
+        <a href="@Url.Action("Index")">خانه</a>
+        <i class="fa fa-angle-left"></i>
+    </li>
+    <li>
+        <span>داشبورد مدیریت</span>
+    </li>
+}
+
+@section PageActionsMenu{
+  
+}
+
+@section PageScripts{
+    <!-- BEGIN PAGE LEVEL PLUGINS -->
+    <script src="~/Content/assets/global/plugins/counterup/jquery.waypoints.min.js" ></script>
+    <script src="~/Content/assets/global/plugins/counterup/jquery.counterup.min.js" ></script>
+    <script src="~/Content/assets/global/plugins/amcharts/amcharts.js" ></script>
+    <script src="~/Content/assets/global/plugins/amcharts/serial.js" ></script>
+    <script src="~/Content/assets/global/plugins/amcharts/lang/fa.js" ></script>
+    <script src="~/Content/assets/global/scripts/zigmaweb-charts.js"></script>
+    <script src="~/Content/assets/pages/scripts/user_admindashboard_index.js"></script>
+}
+
+@section Head{
+    <link href="~/Content/assets/global/plugins/bootstrap-daterangepicker/daterangepicker.min.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/assets/global/plugins/morris/morris.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/assets/global/plugins/fullcalendar/fullcalendar.min.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/assets/global/plugins/jqvmap/jqvmap.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/assets/global/css/zigmaweb-charts.css" rel="stylesheet"/>
+}

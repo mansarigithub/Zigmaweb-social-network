@@ -1,0 +1,40 @@
+﻿@model ZigmaWeb.UI.ViewModels.Blog.BlogPageViewModelBase
+<li class="menu-dropdown classic-menu-dropdown @(ViewBag.ActiveMenu == "Home" ? "active" : "")">
+    <a href="/@Model.Name">
+        خانه
+        <span class="arrow"></span>
+    </a>
+</li>
+<li class="menu-dropdown classic-menu-dropdown @(ViewBag.ActiveMenu == "Home" ? "active" : "")">
+    <a href="/@Model.Name/archive">
+        آرشیو مطالب
+        <span class="arrow"></span>
+    </a>
+</li>
+<li class="menu-dropdown classic-menu-dropdown @(ViewBag.ActiveMenu == "Home" ? "active" : "")">
+    <a href="/profile/@Model.CreatorId">
+        مدیر وبلاگ
+        <span class="arrow"></span>
+    </a>
+</li>
+
+@if (!string.IsNullOrEmpty(Model.BlogEmail)) {
+    <li class="menu-dropdown classic-menu-dropdown @(ViewBag.ActiveMenu == "Home" ? "active" : "")">
+        <a href="mailto:@Model.BlogEmail">
+            پست الکترونیک
+            <span class="arrow"></span>
+        </a>
+    </li>
+}
+
+@*    <li class="menu-dropdown classic-menu-dropdown @(ViewBag.ActiveMenu == "Authors" ? "active" : "")">
+        <a href="javascript:;">
+            نویسندگان
+            <span class="arrow"></span>
+        </a>
+        <ul class="dropdown-menu pull-left">
+            <li class="">
+                <a href="layout_mega_menu_light.html" class="nav-link  "> مقالات برتر </a>
+            </li>
+        </ul>
+    </li>*@

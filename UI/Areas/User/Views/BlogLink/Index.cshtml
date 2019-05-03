@@ -1,0 +1,104 @@
+﻿@using ZigmaWeb.UI.Infrastructure.ExtensionMethod
+@using ZigmaWeb.UI.Areas.User.ViewModels.BlogFriend;
+@model BlogLinkViewModel
+@{
+    ViewBag.Title = "پیوندهای وبلاگ";
+}
+
+<div class="portlet light">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="icon-plus font-blue-hoki"></i>
+            <span class="caption-subject font-blue-hoki bold">افزودن پیوند جدید</span>
+            @*<span class="caption-helper">demo form...</span>*@
+        </div>
+    </div>
+    <div class="portlet-body form">
+        <form id="linksForm" novalidate class="validatable-form">
+            @Html.AntiForgeryToken()
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group form-md-line-input form-md-floating-label">
+                        @Html.TextBoxFor(model => model.Link.Name, new { @class = "form-control", maxlength = 50 })
+                        @Html.ValidationMessageFor2(model => model.Link.Name)
+                        @Html.LabelFor(model => model.Link.Name, new { @class = "control-label" })
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group form-md-line-input form-md-floating-label">
+                        @(Html.TextBoxFor(model => model.Link.Url, new { @class = "form-control ltr", maxlength = 200 }))
+                        @Html.ValidationMessageFor2(model => model.Link.Url)
+                        @Html.LabelFor(model => model.Link.Url, new { @class = "control-label" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="margiv-top-10">
+                <button type="button" id="addFriendButton" class="btn blue">ذخیره</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<div class="portlet light">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="icon-link font-blue-hoki"></i>
+            <span class="caption-subject font-blue-hoki bold">پیوندهای وبلاگ</span>
+            @*<span class="caption-helper">demo form...</span>*@
+        </div>
+    </div>
+    <div class="portlet-body form">
+        <div class="table-container">
+            <table class="table table-striped table-bordered table-hover table-checkable dataTable"></table>
+        </div>
+    </div>
+</div>
+
+@section PageBreadcrumb{
+    <li>
+        <i class="icon-home"></i>
+        <a href="@Url.Action("index", "bloglink")">وبلاگ</a>
+        <i class="fa fa-angle-left"></i>
+    </li>
+    <li>
+        <span>پیوندهای وبلاگ</span>
+    </li>
+}
+
+@section PageActionsMenu{
+    <div class="btn-group">
+        <button class="btn btn-fit-height" href="javascript:;" data-toggle="dropdown" aria-expanded="true">
+            عملیات گروهی
+            <i class="fa fa-angle-down"></i>
+        </button>
+        <ul class="dropdown-menu pull-right">
+            <li class="delete-items">
+                <a>
+                    <i class="fa fa-trash-o font-red"></i><span class="font-red">حذف</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+}
+
+@section ComponentScripts {
+    <script src="~/content/assets/global/plugins/datatables/datatables.min.js"></script>
+    <script src="~/content/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js"></script>
+    <script src="~/content/assets/global/plugins/datatables/zw-datatable.js"></script>
+    <script src="~/scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/scripts/jquery.validate.min.js"></script>
+    <script src="~/scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Content/assets/global/plugins/bootstrap-toastr/toastr.min.js"></script>
+}
+
+@section PageScripts {
+    <script src="~/content/assets/pages/scripts/user_bloglink_index.js"></script>
+}
+
+@section Head {
+    <link href="~/content/assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" />
+    <link href="~/content/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap-rtl.css" rel="stylesheet" />
+    <link href="~/content/assets/global/plugins/bootstrap-toastr/toastr-rtl.min.css" rel="stylesheet" />
+}

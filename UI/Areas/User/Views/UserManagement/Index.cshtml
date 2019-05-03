@@ -1,0 +1,75 @@
+﻿@model ZigmaWeb.UI.Areas.User.Models.UserManagement.UserManagementViewModel
+@using ZigmaWeb.Model.Entity.ZwCore;
+@using Common.Globalization;
+@using ZigmaWeb.Model.Entity;
+@using ZigmaWeb.UI;
+
+@{
+    ViewBag.Title = "مدیریت کاربران";
+}
+
+@section styles {
+    <style>
+        #child-body {
+            padding: 10px;
+        }
+    </style>
+}
+
+<div id="child-body">
+    <div class="table-responsive">
+        <table class="grid">
+            <thead>
+                <tr>
+                    <th>ایمیل</th>
+                    <th>نام</th>
+                    <th>نام خانوادگی</th>
+                    <th>جنسیت</th>
+                    <th>تاریخ عضویت</th>
+                    <th>مطالب</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var user in Model.Users)
+                {
+                    <tr>
+                        <td>@user.Email</td>
+                        <td>@user.FirstName</td>
+                        <td>@user.LastName</td>
+                        <td>@user.Sexuality.ToString().Localize()</td>
+                        <td>@user.Membership.CreateDate.ToPersianDate("f")</td>
+                        <td>@user.Contents.Count()</td>
+                        <td>
+                            @Ajax.ActionLink(" ", "Edit", new { id = user.Id }, new AjaxOptions()
+                           {
+                               HttpMethod = "Get",
+                               OnComplete = "onEdit",
+                               UpdateTargetId = "modal-body"
+                           }, new { @class = "glyphicon glyphicon-option-horizontal" })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<nav id="nav-bottom" class="navbar navbar-fixed-bottom navbar-white">
+    <div class="container-fluid">
+        <ul class="nav navbar-nav navbar-right">
+            <li><p id="statusbar-msg" class="navbar-text"></p></li>
+        </ul>
+        <ul class="nav navbar-nav">
+            <li><p class="navbar-text">تعداد کل کاربران: @Model.TotalUsersCount</p></li>
+        </ul>
+    </div>
+</nav>
+
+@section scripts {
+    <script>
+        function onEdit(data) {
+            zw.showModal(data.responseText, 'ویرایش اطلاعات کاربر');
+        }
+    </script>
+}

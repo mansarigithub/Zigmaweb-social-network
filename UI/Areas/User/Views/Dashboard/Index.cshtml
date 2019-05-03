@@ -1,0 +1,281 @@
+﻿@model ZigmaWeb.UI.Areas.User.ViewModels.Dashboard.DashboardViewModel
+@{
+    ViewBag.Title = "داشبورد";
+    var stats = Model.DashboardModelContainer;
+}
+@if (User.IsApproved == false)
+{
+    <div style="text-align:justify">
+        <div class="alert alert-warning JustifyLeft">
+            <div>
+                <strong>هشدار!</strong>
+                <br />
+                شما هنوز آدرس پست الکترونیک خود را تایید نکرده اید
+                لینک تایید به آدرس پست الکترونیک شما (@User.Email) ارسال شده است.
+                در صورت عدم تایید و اشتباه بودن آدرس ایمیل،  بازیابی کلمه عبور امکان پذیر نخواهد بود
+                <br />
+                توجه:
+
+                ممکن است ایمیل ارسال شده در پوشه Junk یا Spam ذخیره شده باشد. در صورت لزوم این پوشه ها را نیز بررسی بفرمایید.
+                درصورتی که ایمیل فعال‌سازی در پوشه‌های ذکر شده قرار گرفته باشد، ممکن است لینک های درون آن غیرفعال شده باشند. برای اینکه لینک فعال سازی عمل کند، ابتدا ایمیل را به پوشه Inbox منتقل کنید.
+            </div>
+            <div>
+                <br />
+                <button id="btnSendEmailConfirmation" class="btn btn-default  ">ارسال مجدد لینک تایید</button>
+            </div>
+        </div>
+
+    </div>
+}
+<div class="row">
+    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <a class="dashboard-stat dashboard-stat-v2 blue" href="/user/statistics">
+            <div class="visual">
+                <i class="fa fa-comments"></i>
+            </div>
+            <div class="details">
+                <div class="number">
+                    <span data-counter="counterup" data-value="@stats.TodayTotallVisits">0</span>
+                </div>
+                <div class="desc">مجموع بازدیدهای امروز</div>
+            </div>
+        </a>
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <a class="dashboard-stat dashboard-stat-v2 red" href="/user/comment">
+            <div class="visual">
+                <i class="fa fa-bar-chart-o"></i>
+            </div>
+            <div class="details">
+                <div class="number">
+                    <span data-counter="counterup" data-value="@stats.PendingComments.Count">0</span>
+                </div>
+                <div class="desc">دیدگاه‌ها</div>
+            </div>
+        </a>
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <a class="dashboard-stat dashboard-stat-v2 green" href="/user/article">
+            <div class="visual">
+                <i class="fa fa-shopping-cart"></i>
+            </div>
+            <div class="details">
+                <div class="number">
+                    <span data-counter="counterup" data-value="@stats.ArticlesCount">0</span>
+                </div>
+                <div class="desc">تعداد مقالات</div>
+            </div>
+        </a>
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <a class="dashboard-stat dashboard-stat-v2 purple" href="/user/blog">
+            <div class="visual">
+                <i class="fa fa-globe"></i>
+            </div>
+            <div class="details">
+                <div class="number">
+                    <span data-counter="counterup" data-value="@stats.BlogPostsCount">0</span>
+                </div>
+                <div class="desc">تعداد پست­ها</div>
+            </div>
+        </a>
+    </div>
+</div>
+
+<div class="clearfix"></div>
+
+<div class="row">
+    <div class="col-md-6 col-sm-6">
+        <div class="portlet light data-portlet">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-bar-chart font-dark hide"></i>
+                    <span class="caption-subject font-dark ">تعداد مشاهده مقالات</span>
+                    <span class="caption-helper">(هفتگی)</span>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div id="site_statistics_content" class="display-block">
+                    <div id="articlesVisitChart" class="chart chart-div" style="height: 400px;padding: 0px; position: relative;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @if (User.HasBlog) {
+        <div class="col-md-6 col-sm-6">
+            <div class="portlet light data-portlet">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="icon-share font-red-sunglo hide"></i>
+                        <span class="caption-subject font-dark ">تعداد مشاهده وبلاگ</span>
+                        <span class="caption-helper">(هفتگی)</span>
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <div class="display-block">
+                        <div id="postsVisitChart" class="chart chart-div" style="height: 400px;padding: 0px; position: relative;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+    <div class="col-md-6 col-sm-6">
+        <div class="portlet light data-portlet">
+            <div class="portlet-title tabbable-line">
+                <div class="caption">
+                    <i class="icon-bubbles font-dark hide"></i>
+                    <span class="caption-subject font-dark uppercase">دیدگاه‌ها</span>
+                </div>
+                <ul class="nav nav-tabs">
+                    <li class="active">
+                        <a href="#portlet_comments_1" data-toggle="tab">آخرین دیدگاه­ها</a>
+                    </li>
+                    @*<li>
+                        <a href="#portlet_comments_2" data-toggle="tab">تایید شده</a>
+                        </li>*@
+                </ul>
+            </div>
+            <div class="portlet-body">
+                <div class="tab-content">
+                    <div class="tab-pane active" id="portlet_comments_1">
+                        <div class="mt-comments">
+                            @foreach (var comment in stats.PendingComments) {
+                                <div class="mt-comment">
+                                    <div class="mt-comment-img">
+                                        <img src="@Url.RouteUrl("V-GetProfileImage", new { userId = comment.SenderId, imageSize = "tiny"})">
+                                    </div>
+                                    <div class="mt-comment-body">
+                                        <div class="mt-comment-info">
+                                            <span class="mt-comment-author"><a target="_blank" href="/profile/@comment.SenderId">@comment.SenderFullName</a></span>
+                                            <span class="mt-comment-date number-fa">@comment.CreateDateString</span>
+                                        </div>
+                                        <div class="mt-comment-text font-blue-hoki margin-bottom-5">@comment.ContentTitle</div>
+                                        <div class="mt-comment-text">@comment.Text</div>
+                                        @*<div class="mt-comment-details">
+                                            <span class="mt-comment-status mt-comment-status-pending">در انتظار تایید</span>
+                                            <ul class="mt-comment-actions">
+                                            <li>
+                                            <a>تایید</a>
+                                            </li>
+                                            <li>
+                                            <a>حذف</a>
+                                            </li>
+                                            </ul>
+                                            </div>*@
+                                    </div>
+                                </div>
+                            }
+
+                            @if (!stats.PendingComments.Any()) {
+                                <div class="note note-danger" style="line-height: 30px;">
+                                    <p>هیچ دیدگاهی ثبت نشده است</p>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6 col-sm-6">
+        <div class="portlet light data-portlet">
+            <div class="portlet-title tabbable-line">
+                <div class="caption">
+                    <i class="icon-bubbles font-dark hide"></i>
+                    <span class="caption-subject font-dark uppercase">پیام‌های شخصی</span>
+                </div>
+                <ul class="nav nav-tabs">
+                    <li class="active">
+                        <a href="#portlet_comments_1" data-toggle="tab">آخرین پیام‌ها</a>
+                    </li>
+                    @*<li>
+                        <a href="#portlet_comments_2" data-toggle="tab">تایید شده</a>
+                        </li>*@
+                </ul>
+            </div>
+            <div class="portlet-body">
+                <div class="tab-content">
+                    <div class="tab-pane active" id="portlet_comments_1">
+                        <div class="mt-comments">
+                            @foreach (var message in stats.LatestMessages) {
+                                <div class="mt-comment">
+                                    <div class="mt-comment-img">
+                                        <img src="@Url.RouteUrl("V-GetProfileImage", new { userId = message.SenderId, imageSize = "tiny"})">
+                                    </div>
+                                    <div class="mt-comment-body">
+                                        <div class="mt-comment-info">
+                                            <span class="mt-comment-author"><a target="_blank" href="/profile/@message.SenderId">@message.SenderFullName</a></span>
+                                            <span class="mt-comment-date number-fa">@message.CreateDateString</span>
+                                        </div>
+                                        @*<div class="mt-comment-text font-blue-chambray margin-bottom-5">@message.ContentTitle</div>*@
+                                        @*<div class="mt-comment-text">@Html.Raw(message.Text.Replace("\n", "<br/>"))</div>*@
+                                        <div class="mt-comment-text">@message.Text</div>
+                                        @*<div class="mt-comment-details">
+                                            <span class="mt-comment-status mt-comment-status-pending">در انتظار تایید</span>
+                                            <ul class="mt-comment-actions">
+                                            <li>
+                                            <a>تایید</a>
+                                            </li>
+                                            <li>
+                                            <a>حذف</a>
+                                            </li>
+                                            </ul>
+                                            </div>*@
+                                    </div>
+                                </div>
+                            }
+
+                            @if (!stats.LatestMessages.Any()) {
+                                <div class="note note-danger" style="line-height: 30px;">
+                                    <p>هیچ پیامی ندارید</p>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section PageBreadcrumb{
+    <li>
+        <i class="icon-home"></i>
+        <a href="@Url.Action("Index")">داشبورد</a>
+    </li>
+}
+
+@section PageActionsMenu{
+    <div class="btn-group pull-right">
+        <button type="button" class="btn btn-fit-height grey-salt dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="true">
+            عملیات
+            <i class="fa fa-angle-down"></i>
+        </button>
+        <ul class="dropdown-menu pull-right" role="menu">
+            <li>
+                <a href="">
+                    <i class="icon-refresh"></i> بروزرسانی اطلاعات
+                </a>
+            </li>
+
+        </ul>
+    </div>
+}
+
+@section PageScripts{
+    <script src="~/Content/assets/global/plugins/counterup/jquery.waypoints.min.js" ></script>
+    <script src="~/Content/assets/global/plugins/counterup/jquery.counterup.min.js" ></script>
+    <script src="~/Content/assets/global/plugins/amcharts/amcharts.js" ></script>
+    <script src="~/Content/assets/global/plugins/amcharts/serial.js" ></script>
+    <script src="~/Content/assets/global/plugins/amcharts/lang/fa.js" ></script>
+    <script src="~/Content/assets/global/scripts/zigmaweb-charts.js"></script>
+    <script src="~/Content/assets/pages/scripts/user_dashboard_index.min.js" ></script>
+}
+
+@section Head{
+    <link href="~/Content/assets/global/css/zigmaweb-charts.css" rel="stylesheet" />
+    <link href="~/Content/assets/pages/css/user_dashboard.css" rel="stylesheet" />
+}

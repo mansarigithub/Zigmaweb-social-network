@@ -1,0 +1,89 @@
+﻿@model ZigmaWeb.UI.Areas.User.ViewModels.SetupBlog.SetupBlogViewModel
+@using ZigmaWeb.UI.Infrastructure.ExtensionMethod
+@{
+}
+
+<div class="portlet light">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="icon-equalizer font-blue-hoki"></i>
+            <span class="caption-subject font-blue-hoki bold">ایجاد وبلاگ</span>
+            @*<span class="caption-helper">demo form...</span>*@
+        </div>
+    </div>
+    <div class="portlet-body form">
+        <form id="blogForm" novalidate class="validatable-form">
+            @Html.AntiForgeryToken()
+            <div class="form-group form-md-line-input form-md-floating-label">
+                <div class="input-group">
+                    @Html.TextBoxFor(model => model.Blog.Name, new { @class = "form-control text-right ltr font-yellow-gold", maxlength = 20 })
+                    <span class="help-block">آدرس اینترنتی وبلاگ خود را وارد کنید. در انتخاب آدرس دقت کنید زیرا در آینده امکان تغییر آن را نخواهید داشت.</span>
+                    @Html.ValidationMessageFor2(model => model.Blog.Name, "number-fa")
+                    <span class="input-group-addon ltr font-yellow-gold">http://zigmaweb.com/</span>
+                    @Html.LabelFor(model => model.Blog.Name, new { @class = "control-label" })
+                </div>
+            </div>
+
+            <div class="form-group form-md-line-input form-md-floating-label">
+                @Html.TextBoxFor(model => model.Blog.Title, new { @class = "form-control", maxlength = 50 })
+                @Html.ValidationMessageFor2(model => model.Blog.Title)
+                @Html.LabelFor(model => model.Blog.Title, new { @class = "control-label" })
+                <span class="help-block">یک عنوان برای وبلاگ خود انتخاب کنید. مثلا  «وبلاگ دانشجویان رشته مدیریت بازرگانی دانشگاه تهران»</span>
+            </div>
+
+            <div class="form-group form-md-line-input form-md-floating-label">
+                @Html.TextBoxFor(model => model.Blog.Email, new { @class = "form-control" })
+                @Html.ValidationMessageFor2(model => model.Blog.Email)
+                @Html.LabelFor(model => model.Blog.Email, new { @class = "control-label" })
+                <span class="help-block">آدرس پست الکترونیکی که مایلید بازدیدکنندگان وبلاگتان از طریق آن با شما در تماس باشند. این آدرس برای همه قابل رویت است.</span>
+            </div>
+
+            <div class="form-group form-md-line-input form-md-floating-label">
+                @Html.TextAreaFor(model => model.Blog.Description, new { rows = "5", @class = "form-control", maxlength = 2000 })
+                @Html.LabelFor(model => model.Blog.Description, new { @class = "control-label" })
+                <span class="help-block">در یک پاراگراف و به طور خلاصه خودتان و یا وبلاگتان را معرفی کنید</span>
+            </div>
+
+            <div class="margiv-top-10">
+                <button type="submit" class="btn blue">ایجاد وبلاگ</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section ComponentScripts{
+    <script src="~/content/assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
+    <script src="~/scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/scripts/jquery.validate.min.js"></script>
+    <script src="~/scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Content/assets/global/plugins/bootstrap-toastr/toastr.min.js"></script>
+}
+
+@section PageScripts{
+    <script src="~/Content/assets/pages/scripts/user_setupblog_index.js"></script>
+}
+
+@section PageBreadcrumb{
+    <li>
+        <i class="icon-home"></i>
+        <a href="@Url.Action("index", "blog")">وبلاگ</a>
+        <i class="fa fa-angle-left"></i>
+    </li>
+    <li>
+        <span>ایجاد وبلاگ</span>
+    </li>
+}
+
+@section PageActionsMenu{
+
+}
+
+@section Head {
+    <link href="~/content/assets/global/plugins/bootstrap-toastr/toastr-rtl.min.css" rel="stylesheet" />
+
+    <style>
+        .form-group.form-md-line-input .form-control.edited:not([readonly]) ~ .help-block-error {
+            opacity: 1 !important;
+        }
+    </style>
+}

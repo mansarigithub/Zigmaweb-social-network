@@ -1,0 +1,49 @@
+﻿@{
+    ViewBag.Title = "پیام‌های دریافتی";
+}
+
+<div class="table-container">
+    <table class="messages-grid table table-striped table-bordered table-hover table-checkable dataTable"></table>
+</div>
+
+@section PageBreadcrumb{
+    <li>
+        <i class="icon-home"></i>
+        <a href="@Url.Action("index")">پیام‌ها</a>
+        <i class="fa fa-angle-left"></i>
+    </li>
+    <li>
+        <span>پیام‌های دریافتی</span>
+    </li>
+}
+
+@section PageActionsMenu{
+    @*<div class="btn-group">
+        <button class="btn btn-fit-height" href="javascript:;" data-toggle="dropdown" aria-expanded="true">
+            عملیات گروهی
+            <i class="fa fa-angle-down"></i>
+        </button>
+        <ul class="dropdown-menu pull-right">
+            <li class="delete-comments">
+                <a>
+                    <i class="fa fa-trash-o font-red"></i><span class="font-red">حذف</span>
+                </a>
+            </li>
+        </ul>
+    </div>*@
+}
+
+@section ComponentScripts {
+    <script src="~/content/assets/global/plugins/datatables/datatables.min.js"></script>
+    <script src="~/content/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js"></script>
+    <script src="~/content/assets/global/plugins/datatables/zw-datatable.js"></script>
+}
+
+@section PageScripts {
+    <script src="~/content/assets/pages/scripts/user_message_received.js"></script>
+}
+
+@section Head {
+    <link href="~/content/assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" />
+    <link href="~/content/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap-rtl.css" rel="stylesheet" />
+}

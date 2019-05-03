@@ -1,0 +1,34 @@
+﻿@model ZigmaWeb.UI.Infrastructure.Mvc.GlobalViewModel.PaginationViewModel
+@{
+    int totalPages = (int)Math.Ceiling((decimal)Model.TotalRows / Model.PageSize);
+    int visiblePagesStartIndex = Model.SelectedPage - Model.VisiblePreviousPages;
+    int visiblePagesEndIndex = Model.SelectedPage + Model.VisibleNextPages;
+    if (visiblePagesStartIndex < 1) {
+        visiblePagesStartIndex = 1;
+    }
+    if (visiblePagesEndIndex > totalPages) {
+        visiblePagesEndIndex = totalPages;
+    }
+}
+
+<ul class="pagination pagination-lg" style="margin-top:60px">
+    @if (visiblePagesStartIndex > 1) {
+        <li>
+            <a href="@Model.UrlTemplate.Replace("{PageIndex}", (Model.SelectedPage -1).ToString())">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        </li>
+    }
+    @for (int i = visiblePagesStartIndex; i <= visiblePagesEndIndex; i++) {
+        <li @(Model.SelectedPage == i ? "class=active" : "")>
+            <a class="number-fa" href="@Model.UrlTemplate.Replace("{PageIndex}", i.ToString())"> @i </a>
+        </li>
+    }
+    @if (visiblePagesEndIndex < totalPages) {
+        <li>
+            <a href="@Model.UrlTemplate.Replace("{PageIndex}", (Model.SelectedPage +1).ToString())">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        </li>
+    }
+</ul>

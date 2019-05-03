@@ -1,0 +1,144 @@
+﻿.page-content {
+    background-color: rgb(249, 249, 249);
+    /*background-color: white !important;*/
+}
+
+.page-header .page-header-top .top-menu .navbar-nav > li.dropdown > .dropdown-menu,
+.page-header .page-header-menu .hor-menu .navbar-nav > li .dropdown-menu li > a {
+    font-family: IRANSans;
+}
+
+.page-header .page-header-top .page-logo .logo-default {
+    margin: 12.5px 0 0;
+}
+
+.page-header .page-header-top .page-logo #logo {
+    float: right;
+}
+
+.page-header .page-header-top .page-logo #name {
+    float: right;
+    font-size: 19px;
+    margin-top: 22px;
+    margin-right: 5px;
+    color: #333;
+}
+
+.page-header .page-header-top .page-logo {
+    width: initial !important;
+}
+
+.page-prefooter a {
+    margin-left: 3px;
+    margin-right: 3px;
+    color: #a2abb7 !important;
+}
+
+    .page-prefooter a:hover {
+        text-decoration: none;
+        color: white !important;
+    }
+
+
+.dashboard-stat .visual > i {
+    line-height: 50px;
+    margin-right: 0;
+}
+
+.dashboard-stat .details .desc {
+    margin-top: 10px;
+}
+
+ul > .mt-list-item:hover {
+    background-color: inherit !important;
+}
+
+.btn.btn-outline.blue-hoki {
+    border-color: #D8D8D8 !important;
+}
+
+.btn-outline-light {
+    font-weight: normal !important;
+    box-shadow: none !important;
+    border-color: #ECECEC !important;
+    color: #8E8E8E !important;
+}
+
+    .btn-outline-light:hover {
+        background-color: #3598DC !important;
+        color: white !important;
+    }
+
+.sidebar-section {
+    margin-bottom: 30px;
+}
+
+    .sidebar-section h4 {
+        font-size: 15px;
+    }
+
+.link-box a {
+    display: block;
+    margin-bottom: 11px;
+}
+
+.article-info .authorder-by {
+    font-size: 12px !important;
+}
+
+.article-info h5 {
+    font-size: 16px !important;
+}
+
+.article-info .content-abstract {
+    font-size: 12px !important;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.page-prefooter h2 {
+    font-weight: normal !important;
+}
+
+.page-footer a {
+    color: #a2abb7;
+    margin: 0 5px;
+    text-decoration: none;
+}
+
+.mt-element-list .list-news.mt-list-container ul > .mt-list-item {
+    padding: 5px 15px;
+    border: none;
+}
+
+.mt-element-list .list-news.mt-list-container {
+    border: none;
+}
+
+.center {
+    text-align: center;
+}
+
+.general-item-list>.item>.item-head>.item-details>.item-name {
+    margin-left: 20px;
+    margin-right: 10px;
+}
+
+.general-item-list > .item > .item-body {
+    margin-top: 0;
+    margin-right: 59px
+}
+
+.general-item-list>.item>.item-head {
+     margin-bottom: 0; 
+}
+
+#site-header {
+    font-size: 26px;
+    padding-top: 5px;
+    padding-right: 3px;
+}
+
+.header-description {
+    font-size: 16px;
+}

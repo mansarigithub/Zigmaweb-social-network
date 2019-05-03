@@ -1,0 +1,13 @@
+﻿@model ZigmaWeb.UI.Areas.User.ViewModels.Profile.ProfileSettingsViewModel
+@using ZigmaWeb.UI.Infrastructure.ExtensionMethod
+
+<div class="portlet light">
+    <div class="portlet-body form profile-image-container">
+        <div id="profileImageArea">
+            <div id="croppicArea">
+                <img id="currentProfileImage" src="@Url.RouteUrl("GetProfileImage",new {imageSize = "large" })">
+            </div>
+            <button id="chooseImage" type="button" class="btn btn-primary">انتخاب تصویر پروفایل</button>
+        </div>
+    </div>
+</div>

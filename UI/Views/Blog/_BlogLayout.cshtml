@@ -1,0 +1,103 @@
+﻿@model ZigmaWeb.UI.ViewModels.Blog.BlogPageViewModelBase
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row all" style="margin-top:20px">
+    <div class="col-lg-9">
+        @RenderBody()
+    </div>
+    <div class="col-lg-3">
+        @if (!string.IsNullOrEmpty(Model.BlogDescription)) {
+            <div class="portlet light">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="icon-note font-blue-hoki"></i>
+                        درباره وبلاگ
+                    </div>
+                    <div class="actions">
+                    </div>
+                </div>
+                <div class="portlet-body content-text">
+                    @Html.Raw(Model.BlogDescription.Replace(Environment.NewLine, "</br>"))
+                </div>
+            </div>
+        }
+
+        @if (Model.BlogLatestPosts != null && Model.BlogLatestPosts.Any())
+        {
+            <div class="portlet light">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="icon-list font-blue-hoki"></i>
+                        آخرین پست ها
+                    </div>
+                    <div class="actions">
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <div class="link-box">
+                        @foreach (var item in Model.BlogLatestPosts)
+                        {
+                            <a href="/@Model.Name/post/@item.Id" class="number-fa" title="@item.PublishDateString">@item.Title</a>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+
+        @if (Model.ArchiveItems != null && Model.ArchiveItems.Any()) {
+            <div class="portlet light">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="icon-layers font-blue-hoki"></i>
+                        آرشیو مطالب
+                    </div>
+                    <div class="actions">
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <div class="link-box">
+                        @foreach (var item in Model.ArchiveItems) {
+                            <a href="/@Model.Name/archive/@item.Year/@item.Month" class="number-fa">@item.PersianMonthName @item.Year</a>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+
+        @if (Model.BlogLinks.Any()) {
+            <div class="portlet light">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="icon-link font-blue-hoki"></i>
+                        پیوندها
+                    </div>
+                    <div class="actions">
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <div class="link-box">
+                        @foreach (var l in Model.BlogLinks) {
+                            <a rel="nofollow" href="@l.Url">@l.Name</a>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+
+
+    </div>
+</div>
+
+@section head {
+    @RenderSection("head", false)
+}
+
+@section PageScripts {
+    @RenderSection("PageScripts", false)
+}
+
+@section ComponentScripts {
+    @RenderSection("ComponentScripts", false)
+}

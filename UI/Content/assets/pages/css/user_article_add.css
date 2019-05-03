@@ -1,0 +1,9 @@
+.cke_chrome {
+    border-top: 0px !important;
+    border-bottom: 0px !important;
+}
+
+#chooseImageBtn {
+    width:100%;
+    margin-top:10px;
+}

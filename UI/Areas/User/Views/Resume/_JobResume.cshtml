@@ -1,0 +1,71 @@
+﻿@using ZigmaWeb.UI.Areas.User.ViewModels.Resume
+@using ZigmaWeb.Localization.ExtensionMethod
+@model ResumeViewModel
+@{
+    var yearsList = new List<SelectListItem>();
+    for (int year = 1395; year >= 1330; year--) {
+        yearsList.Add(new SelectListItem() { Text = year.ToString(), Value = year.ToString() });
+    }
+}
+<div class="row margin-bottom-20">
+    <div class="col-md-12">
+        <button id="addJobResumeButton" type="button" class="btn blue">افزودن</button>
+    </div>
+</div>
+
+<form id="jobResumeForm" novalidate class="validatable-form display-hide form-horizontal" style="padding:20px; border: 1px solid #e7ecf1">
+    <div class="form-body">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group form-md-line-input">
+                    @Html.LabelFor(model => model.JobResume.OrganizationName, new { @class = "col-md-4 control-label" })
+                    <div class="col-md-8">
+                        @Html.TextBoxFor(model => model.JobResume.OrganizationName, new { @class = "form-control rtl" })
+                        @Html.ValidationMessageFor2(model => model.JobResume.OrganizationName)
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group form-md-line-input">
+                    @Html.LabelFor(model => model.JobResume.JobName, new { @class = "col-md-4 control-label" })
+                    <div class="col-md-8">
+                        @Html.TextBoxFor(model => model.JobResume.JobName, new { @class = "form-control rtl" })
+                        @Html.ValidationMessageFor2(model => model.JobResume.JobName)
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group form-md-line-input">
+                    @Html.LabelFor(model => model.JobResume.StartYear, new { @class = "col-md-4 control-label" })
+                    <div class="col-md-8">
+                        @Html.DropDownListFor(model => model.JobResume.StartYear, yearsList, "", new { @class = "form-control" })
+                        @*@Html.ValidationMessageFor2(model => model.JobResume.StartYear)*@
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group form-md-line-input">
+                    @Html.LabelFor(model => model.JobResume.EndYear, new { @class = "col-md-4 control-label" })
+                    <div class="col-md-8">
+                        @Html.DropDownListFor(model => model.JobResume.EndYear, yearsList, "ToNow".Localize(), new { @class = "form-control" })
+                        @*@Html.ValidationMessageFor2(model => model.JobResume.EndYear)*@
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="margiv-top-10">
+            <button type="submit" class="btn blue">ذخیره</button>
+            <button type="button" id="cancelAddJobResumeButton" class="btn red-haze">لغو</button>
+        </div>
+
+    </div>
+</form>
+
+<div class="table-container">
+    <table id="jobResumeGrid" style="width:100% !important" class="contents-grid table table-striped table-bordered table-hover table-checkable dataTable"></table>
+</div>
+

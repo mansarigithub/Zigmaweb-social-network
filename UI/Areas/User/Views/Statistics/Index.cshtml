@@ -1,0 +1,70 @@
+﻿
+
+@{
+    ViewBag.Title = "آمار کلی";
+}
+
+
+<div class="row">
+    <div class="col-md-12 col-sm-12">
+        <!-- BEGIN PORTLET-->
+        <div class="portlet light ">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-bar-chart font-dark hide"></i>
+                    <span class="caption-subject font-dark bold uppercase">نمودار بازدید کل مقالات</span>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="display-block">
+                    <div id="total-article-visits-chart-div" class="chart chart-div" style="padding: 0px; position: relative;">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END PORTLET-->
+    </div>
+</div>
+
+
+@section PageBreadcrumb{
+    <li>
+        <i class="icon-home"></i>
+        <a href="@Url.Action("Index")">خانه</a>
+        <i class="fa fa-angle-left"></i>
+    </li>
+    <li>
+        <span>آمار کلی</span>
+    </li>
+}
+
+@section PageActionsMenu{
+  
+}
+
+@section PageScripts{
+    <!-- BEGIN PAGE LEVEL PLUGINS -->
+    <script src="~/Content/assets/global/plugins/counterup/jquery.waypoints.min.js" ></script>
+    <script src="~/Content/assets/global/plugins/counterup/jquery.counterup.min.js" ></script>
+    <script src="~/Content/assets/global/plugins/amcharts/amcharts.js" ></script>
+    <script src="~/Content/assets/global/plugins/amcharts/serial.js" ></script>
+    <script src="~/Content/assets/global/plugins/amcharts/lang/fa.js" ></script>
+
+
+    
+    <!-- END PAGE LEVEL PLUGINS -->
+    <!-- BEGIN PAGE LEVEL SCRIPTS -->
+    <!-- END PAGE LEVEL SCRIPTS -->
+    <script src="~/Content/assets/global/scripts/zigmaweb-charts.js"></script>
+    <script src="~/Content/assets/pages/scripts/user_statistics_index.js"></script>
+}
+
+@section Head{
+    <!-- BEGIN PAGE LEVEL PLUGINS -->
+    <link href="~/Content/assets/global/plugins/bootstrap-daterangepicker/daterangepicker.min.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/assets/global/plugins/morris/morris.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/assets/global/plugins/fullcalendar/fullcalendar.min.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/assets/global/plugins/jqvmap/jqvmap.css" rel="stylesheet" type="text/css">
+    <!-- END PAGE LEVEL PLUGINS -->
+    <link href="~/Content/assets/global/css/zigmaweb-charts.css" rel="stylesheet" />
+}

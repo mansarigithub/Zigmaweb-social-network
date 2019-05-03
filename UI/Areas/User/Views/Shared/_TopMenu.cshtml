@@ -1,0 +1,84 @@
+﻿<ul class="nav navbar-nav pull-right">
+     @*DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte*@ 
+    <li class="dropdown dropdown-extended dropdown-inbox" id="header_notification_bar">
+        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+            <i class="icon-bell"></i>
+            <span class="badge badge-default notification-count" style="display:none;font-family:IRANSans !important;font-size:13px !important"></span>
+        </a>
+        <ul class="dropdown-menu">
+            <li class="external">
+                <h3 style="display:none">
+                    رویداد جدیدی وجود ندارد
+                </h3>
+                <h3 style="display:none">
+                    <span class="notification-count bold number-fa" style="font-family:IRANSans !important">0</span> رویداد جدید
+                </h3>
+            </li>
+            <li>
+                <ul id="notificationList" class="dropdown-menu-list scroller" style="height:auto" data-handle-color="#637283">
+                    <li class="template hide">
+                        <a>
+                            <span class="photo">
+                                <img class="img-circle">
+                            </span>
+                            <span class="subject">
+                                <span class="from"></span>
+                                <span class="time ltr number-fa"></span>
+                            </span>
+                            <span class="message"></span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+
+    @*<li class="dropdown dropdown-extended dropdown-inbox" id="header_inbox_bar">
+        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+            <i class="icon-envelope-open"></i>
+            <span class="badge badge-default hide"> 0 </span>
+        </a>
+        <ul class="dropdown-menu">
+            <li class="external">
+                <h3>
+                    پیام جدیدی ندارید
+                </h3>
+            </li>
+            <li>*@
+                @* Original Tags *@
+                @*<div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 275px;">
+                    <ul class="dropdown-menu-list scroller" style="height: 275px; overflow: hidden; width: auto;" data-handle-color="#637283" >*@
+
+                @*<div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; ">
+                    <ul class="dropdown-menu-list scroller" style="overflow: hidden; width: auto;" data-handle-color="#637283"></ul><div class="slimScrollBar" style="width: 7px; position: absolute; top: 0px; opacity: 0.4; display: block; border-radius: 7px; z-index: 99; left: 1px; background: rgb(99, 114, 131);"></div><div class="slimScrollRail" style="width: 7px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; opacity: 0.2; z-index: 90; left: 1px; background: rgb(234, 234, 234);"></div>
+                </div>
+            </li>
+        </ul>
+    </li>*@
+
+    <li class="dropdown dropdown-user">
+        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+            <img id="smallProfileImage" alt="" class="img-circle" src="@Url.RouteUrl("GetProfileImage",new {imageSize = "small" })">
+            <span class="username username-hide-on-mobile">@User.FullName</span>
+            <i class="fa fa-angle-down"></i>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-default">
+            <li>
+                <a href="@Url.Action("index", "profilesettings")">
+                    <i class="icon-user"></i> حساب کاربری
+                </a>
+            </li>
+            @*<li>
+                    <a href="">
+                        <i class="icon-settings"></i> تنظیمات
+                    </a>
+                </li>*@
+            <li class="divider"> </li>
+            <li>
+                <a href="@Url.Action("signout", "service")">
+                    <i class="icon-logout"></i> خروج
+                </a>
+            </li>
+        </ul>
+    </li>
+</ul>

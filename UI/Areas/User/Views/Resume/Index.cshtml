@@ -1,0 +1,75 @@
+﻿@using ZigmaWeb.UI.Areas.User.ViewModels.Resume
+@model ResumeViewModel
+@{
+    Layout = "~/Areas/User/Views/Shared/_ProfilePartialLayout.cshtml";
+    ViewBag.Title = "سوابق تحصیلی و کاری";
+    ViewBag.ActiveNav = "Resume";
+    ViewBag.ProfileStatisticsAndSocialLinks = Model.ProfileStatisticsAndSocialLinks;
+}
+
+<div class="portlet light">
+    <div class="portlet-title tabbable-line">
+        <div class="caption caption-md">
+            <i class="icon-globe theme-font hide"></i>
+            <span class="caption-subject font-blue-madison">سوابق</span>
+        </div>
+        <ul class="nav nav-tabs">
+            <li class="active">
+                <a href="#tab_1_1" data-toggle="tab" aria-expanded="true">تحصیلی</a>
+            </li>
+            <li class="">
+                <a href="#tab_1_2" data-toggle="tab" aria-expanded="false">کاری</a>
+            </li>
+        </ul>
+    </div>
+    <div class="portlet-body form">
+        <div class="tab-content">
+            <div class="tab-pane active" id="tab_1_1">
+                @Html.Partial("_EducationalResume", Model)
+            </div>
+            <div class="tab-pane" id="tab_1_2">
+                @Html.Partial("_JobResume", Model)
+            </div>
+        </div>
+    </div>
+</div>
+
+@section ComponentScripts{
+    <script src="~/content/assets/global/plugins/datatables/datatables.min.js"></script>
+    <script src="~/scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/scripts/jquery.validate.min.js"></script>
+    <script src="~/scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Content/assets/global/plugins/jquery-easyautocomplete/js/jquery.easy-autocomplete.min.js"></script>
+
+}
+
+@section PageScripts{
+    <script src="~/Content/assets/pages/scripts/user_resume_index.js"></script>
+}
+
+@section PageBreadcrumb{
+    <li>
+        <span>تخصص‌ و کسب‌وکار</span>
+        <i class="fa fa-angle-left"></i>
+    </li>
+    <li>
+        <span>سوابق تحصیلی و کاری</span>
+    </li>
+
+}
+
+@section PageActionsMenu{
+
+}
+
+@section Head {
+    <link href="~/content/assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" />
+    <link href="~/content/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap-rtl.css" rel="stylesheet" />
+    <link href="~/Content/assets/pages/css/user_resume_index.css" rel="stylesheet" />
+    <link href="~/Content/assets/global/plugins/jquery-easyautocomplete/css/easy-autocomplete.min.css" rel="stylesheet" />
+    <style>
+        .form-group.form-md-line-input .help-block {
+            opacity: 1 !important;
+        }
+    </style>
+}

@@ -1,0 +1,119 @@
+﻿@using ZigmaWeb.PresentationModel.Model;
+@using ZigmaWeb.Localization.ExtensionMethod;
+@{
+    Layout = "~/Areas/User/Views/Shared/_UserAreaLayout.cshtml";
+    var activeNav = (string)ViewBag.ActiveNav;
+    var profileStatsAndLinks = (ProfileStatisticsAndSocialLinksPM)ViewBag.ProfileStatisticsAndSocialLinks;
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="profile-sidebar">
+            <div class="portlet light profile-sidebar-portlet ">
+                <div class="profile-userpic">
+                    <img src="@Url.RouteUrl("getprofileimage",new {imageSize = "large" })" class="img-responsive" alt="">
+                </div>
+                <div class="profile-usertitle">
+                    <div class="profile-uهsertitle-name">@User.FullName</div>
+                    <div class="profile-usertitle-job">@User.Email</div>
+                </div>
+                @*<div class="profile-userbuttons">
+                    <button type="button" class="btn btn-circle green btn-sm">Follow</button>
+                    <button type="button" class="btn btn-circle red btn-sm">Message</button>
+                </div>*@
+                <div class="profile-usermenu">
+                    <ul class="nav">
+                        @*<li @(activeNav == "ProfileOverview" ? "class=active" : "")>
+                            <a href="@Url.Action("index", "profileoverview")">
+                                <i class="icon-home"></i> حساب کاربری
+                            </a>
+                        </li>*@
+                        <li @(activeNav == "Resume" ? "class=active" : "")>
+                            <a href="@Url.Action("index", "resume")">
+                                <i class="icon-layers"></i> سوابق تحصیلی و کاری
+                            </a>
+                        </li>
+                        <li @(activeNav == "Business" ? "class=active" : "")>
+                            <a href="@Url.Action("index", "business")">
+                                <i class="icon-diamond"></i> کسب و کار
+                            </a>
+                        </li>
+                        <li @(activeNav == "ProfileSettings" ? "class=active" : "")>
+                            <a href="@Url.Action("index", "profilesettings")">
+                                <i class="icon-user"></i> حساب کاربری
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="portlet light ">
+                <div class="row list-separated profile-stat">
+                    <div class="col-md-4 col-sm-4 col-xs-6">
+                        <div class="uppercase profile-stat-title"> @profileStatsAndLinks.TotalArticles </div>
+                        <div class="uppercase profile-stat-text"> مقالات </div>
+                    </div>
+                    <div class="col-md-4 col-sm-4 col-xs-6">
+                        <div class="uppercase profile-stat-title"> @profileStatsAndLinks.TotalBlogPosts </div>
+                        <div class="uppercase profile-stat-text"> پست </div>
+                    </div>
+                    <div class="col-md-4 col-sm-4 col-xs-6">
+                        <div class="uppercase profile-stat-title"> @profileStatsAndLinks.TotalVisits </div>
+                        <div class="uppercase profile-stat-text"> بازدید </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="margin-top-20 profile-desc-link">
+                        <i class="fa fa-globe"></i>
+                        <a @if (!string.IsNullOrWhiteSpace(profileStatsAndLinks.WebSiteUrl)) { <text> href="@profileStatsAndLinks.WebSiteUrl" </text> }>
+                            وب سایت
+                        </a>
+                    </div>
+                    <div class="margin-top-20 profile-desc-link">
+                        <i class="fa fa-linkedin"></i>
+                        <a @if (!string.IsNullOrWhiteSpace(profileStatsAndLinks.LinkedInUrl)) { <text> href="@profileStatsAndLinks.LinkedInUrl" </text>  }>
+                            لینکدین
+                        </a>
+                    </div>
+                    <div class="margin-top-20 profile-desc-link">
+                        <i class="fa fa-facebook"></i>
+                        <a @if (!string.IsNullOrWhiteSpace(profileStatsAndLinks.FacebookUrl)) { <text> href="@profileStatsAndLinks.FacebookUrl" </text>   }>
+                            فیسبوک
+                        </a>
+                    </div>
+                    <div class="margin-top-20 profile-desc-link">
+                        <i class="fa fa-twitter"></i>
+                        <a @if (!string.IsNullOrWhiteSpace(profileStatsAndLinks.TwitterUrl)) { <text> href="@profileStatsAndLinks.TwitterUrl" </text>    }>
+                            توییتر
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="profile-content">
+            @RenderBody()
+        </div>
+    </div>
+</div>
+
+
+@section ComponentScripts{
+    @RenderSection("ComponentScripts")
+}
+
+@section PageScripts{
+    @RenderSection("PageScripts")
+}
+
+@section PageBreadcrumb{
+    @RenderSection("PageBreadcrumb")
+}
+
+@section PageActionsMenu{
+    @RenderSection("PageActionsMenu")
+}
+
+@section Head{
+    <link href="~/Content/assets/pages/css/user_profile_partial_layout.css" rel="stylesheet" />
+    @RenderSection("Head")
+}

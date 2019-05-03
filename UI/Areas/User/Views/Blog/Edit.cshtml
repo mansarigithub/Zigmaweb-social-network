@@ -1,0 +1,141 @@
+﻿@model ZigmaWeb.UI.Areas.User.ViewModels.Blog.EditPostViewModel
+@using ZigmaWeb.UI.Infrastructure.ExtensionMethod
+
+@{
+    ViewBag.Title = "ویرایش پست";
+    var tags = string.Join(",", Model.Tags);
+}
+
+@Html.Hidden("blogName", User.Blogs.First().Name)
+
+<form id="contentForm" novalidate class="validatable-form">
+    @Html.HiddenFor(model => model.Content.Id)
+    <div class="form-body">
+        <div class="row">
+            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                <div class="portlet light bordered">
+                    <div class="portlet-body form" style="display: block;">
+                        <div class="form-group form-md-line-input form-md-floating-label">
+                            @Html.TextBoxFor(model => model.Content.Title, new { @class = "form-control contentTitle" })
+                            @Html.ValidationMessageFor2(model => model.Content.Title)
+                            @Html.LabelFor(model => model.Content.Title)
+                        </div>
+                    </div>
+                </div>
+
+                @*<div class="portlet light bordered">
+                    <div class="portlet-body form" style="display: block;">
+                        <div class="btn-group">
+                            <a class="btn blue" href="javascript:;" data-toggle="dropdown" aria-expanded="false">
+                                <i class="fa fa-user"></i> اتصال به حساب OneDrive
+                                <i class="fa fa-angle-down"></i>
+                            </a>
+                            <ul class="dropdown-menu font-dark">
+                                <li>
+                                    <a href="javascript:;" id="oneDriveFilePicker">
+                                        <i class="fa fa-cloud-download "></i> انتخاب تصویر
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>*@
+                @Html.TextAreaFor(model => model.Content.Text, new { id = "contentText", name = "contentText" })
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                <div class="portlet light bordered">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="icon-equalizer font-blue-hoki"></i>
+                            <span class="caption-subject font-blue-hoki bold">انتشار</span>
+                            @*<span class="caption-helper">demo form...</span>*@
+                        </div>
+                        <div class="tools">
+                            <a href="" class="collapse" data-original-title="" title=""> </a>
+                        </div>
+                    </div>
+                    <div class="portlet-body form form-horizontal" style="display: block;">
+                        <div class="form-body">
+                            <div class="form-group">
+                                <label class="col-md-6 control-label right">منتشر شود</label>
+                                <div class="col-md-6">
+                                    @Html.CheckBoxFor(model => model.Content.Published, new { @class = "form-control switch-control" })
+                                    @*<span class="help-block"> A block of help text. </span>*@
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="portlet light bordered">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="icon-tag font-blue-hoki"></i>
+                            <span class="caption-subject font-blue-hoki bold">برچسب‌ها</span>
+                            @*<span class="caption-helper">demo form...</span>*@
+                        </div>
+                        <div class="tools">
+                            <a href="" class="collapse" data-original-title="" title=""> </a>
+                        </div>
+                    </div>
+                    <div class="portlet-body form" style="display: block;">
+                        <input id="tags" type="text" value="@tags" style="width: 100%" />
+                    </div>
+                    <div>
+                        <i class="info">* بعد از وارد کردن هر <a target="_blank" href="~/faq#tag">برچسب</a> کلید Enter را فشار دهید</i>
+                        <br /><br />
+                        <i class="info">* برای دسته بندی مقاله از یک کلمه (مثل:کامپیوتر، مکانیک، الکترونیک، تاریخ، جغرافیا، کشاورزی و...) به عنوان دسته بندی کلی استفاده کنید</i>
+                        <br /><br />
+                        <i class="info">* مقاله هایی که بیشترین برچسب مشترک را با مقاله نمایش داده شده داشته باشند در قسمت مقاله های مرتبط نمایش داده خواهند شد <a target="_blank" href="~/faq#tag">اطلاعات بیشتر...</a> </i>
+                    </div>
+                    <div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section PageBreadcrumb{
+    <li>
+        <i class="icon-home"></i>
+        <a href="@Url.Action("index")">وبلاگ</a>
+        <i class="fa fa-angle-left"></i>
+    </li>
+    <li>
+        <span>پست</span>
+    </li>
+}
+
+@section PageActionsMenu{
+    <button type="button" class="btn btn-fit-height gray-salt dropdown-toggle preview-button" onclick="zw.page.onPreviewClick()">
+        پیش نمایش
+    </button>
+    <button type="button" class="btn btn-fit-height gray-salt dropdown-toggle save-button" onclick="zw.page.onSaveClick()">
+        ذخیره
+    </button>
+}
+
+@section ComponentScripts{
+    <script src="~/content/assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
+    <script src="~/scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/scripts/jquery.validate.min.js"></script>
+    <script src="~/scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/scripts/ckeditor/ckeditor.js"></script>
+    <script src="~/Content/assets/global/plugins/bootstrap-tagsinput/bootstrap-tagsinput.min.js"></script>
+    <script  src="https://js.live.net/v7.0/OneDrive.js"></script>
+
+}
+
+@section PageScripts{
+    <script src="~/Content/assets/global/scripts/cloud-storage.js"></script>
+    <script src="~/content/assets/pages/scripts/user_blog_edit.js"></script>
+}
+
+@section Head{
+    <link href="~/content/assets/pages/css/user_blog_add.css" rel="stylesheet" />
+    <link href="~/Content/assets/global/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css" rel="stylesheet" />
+    <link href="~/content/assets/global/plugins/bootstrap-toastr/toastr-rtl.min.css" rel="stylesheet" />
+    <link href="~/content/assets/global/plugins/bootstrap-switch/css/bootstrap-switch-rtl.min.css" rel="stylesheet" type="text/css">
+}
+

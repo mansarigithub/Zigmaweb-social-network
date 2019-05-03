@@ -1,0 +1,69 @@
+﻿@{
+}
+<div class="btn-group">
+    <button type="button" class="btn btn-circle btn-outline red dropdown-toggle" data-toggle="dropdown">
+        <i class="fa fa-plus"></i>&nbsp;
+        <span class="hidden-sm hidden-xs">دسترسی سریع&nbsp;</span>&nbsp;
+        <i class="fa fa-angle-down"></i>
+    </button>
+    <ul class="dropdown-menu" role="menu">
+        <li>
+            <a href="/profile/@User.UserId" target="_blank">
+                <i class="icon-eye"></i> مشاهده پروفایل
+            </a>
+        </li>
+        @if (User.HasBlog) {
+            <li>
+                <a href="/@User.Blogs.First().Name" target="_blank">
+                    <i class="icon-eye"></i> مشاهده وبلاگ
+                </a>
+            </li>
+        }
+        <li class="divider"> </li>
+
+        <li>
+            <a href="@Url.Action("index", "comment")">
+                <i class="icon-bubbles"></i> دیدگاه‌ها
+                @*<span class="badge badge-success">4</span>*@
+            </a>
+        </li>
+        <li>
+            <a href="@Url.Action("index", "message")">
+                <i class="icon-envelope"></i> پیام‌ها
+                @*<span class="badge badge-success">4</span>*@
+            </a>
+        </li>
+        <li class="divider"> </li>
+        <li>
+            <a href="@Url.Action("add", "article")">
+                <i class="icon-plus"></i> مقاله جدید
+            </a>
+        </li>
+        @if (User.HasBlog) {
+            <li>
+                <a href="@Url.Action("add", "blog")">
+                    <i class="icon-plus"></i> پست جدید
+                </a>
+            </li>
+        }
+        <li class="divider"> </li>
+        <li>
+            <a href="@Url.Action("index", "article")">
+                <i class="icon-docs"></i> مدیریت مقاله ها
+            </a>
+        </li>
+        @if (User.HasBlog) {
+            <li>
+                <a href="@Url.Action("index", "blog")">
+                    <i class="icon-note"></i> مدیریت پست ها
+                </a>
+            </li>
+        }
+        <li class="divider"> </li>
+        <li>
+            <a href="@Url.Action("index", "media")">
+                <i class="icon-picture"></i> مدیریت فایل‌ها
+            </a>
+        </li>
+    </ul>
+</div>

@@ -1,0 +1,85 @@
+﻿@{
+}
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en" dir="rtl">
+<head>
+    <title>@(string.IsNullOrEmpty(ViewBag.Title) ? "زیگماوب" : string.Format("{0} - {1}", ViewBag.Title, "زیگماوب"))</title>
+    <link rel="shortcut icon" href="~/content/assets/global/img/logo.ico" />
+    <meta name="description" content="" />
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+    <link href="/content/assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="/content/assets/global/plugins/simple-line-icons/simple-line-icons.css" rel="stylesheet" type="text/css" />
+    <link href="/content/assets/global/plugins/bootstrap/css/bootstrap-rtl.min.css" rel="stylesheet" type="text/css" />
+    <link href="/content/assets/global/css/components-rtl.min.css" rel="stylesheet" id="style_components" type="text/css" />
+    <link href="~/Content/assets/global/css/signin_layout.css" rel="stylesheet" />
+    <link href="~/Content/assets/global/css/zigmaweb.css" rel="stylesheet" />
+    @RenderSection("Head", false)
+</head>
+
+<body class="login">
+    <div class="user-login-5">
+        <div class="row bs-reset">
+            <div class="col-md-6 login-container bs-reset">
+                <div class="page-header-menu" style="display: block;">
+                    <div class="container">
+                        <div class="hor-menu  ">
+                            <ul class="nav navbar-nav">
+                                <li>
+                                    @*<a href="/">
+                                        بازگشت به صفحه اصلی
+                                    </a>*@
+                                    <br />
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                @RenderBody()
+
+                <div class="login-footer">
+                    <div class="row bs-reset">
+                        <div class="col-xs-7 bs-reset">
+                            <ul class="login-social">
+                                @RenderSection("FooterItems", false)
+                            </ul>
+                        </div>
+                        <div class="col-xs-5 bs-reset">
+                            <div class="login-copyright text-right">
+                                <p>زیگماوب - ۱۳۹۵</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-6 bs-reset">
+                <div class="login-bg"></div>
+            </div>
+        </div>
+    </div>
+
+    <!--[if lt IE 9]>
+    <script src="../assets/global/plugins/respond.min.js"></script>
+    <script src="../assets/global/plugins/excanvas.min.js"></script>
+    <![endif]-->
+    <script src="/content/assets/global/plugins/jquery.min.js" ></script>
+    <script src="~/scripts/jquery.validate.min.js"></script>
+    <script src="~/scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="/content/assets/global/plugins/bootstrap/js/bootstrap.min.js" ></script>
+    <script src="/content/assets/global/plugins/backstretch/jquery.backstretch.min.js" ></script>
+
+    @RenderSection("ComponentScripts", false)
+    <script src="~/content/assets/global/scripts/zigmaweb.js"></script>
+    <script src="/content/assets/pages/scripts/signin_layout.js" ></script>
+    @RenderSection("PageScripts", false)
+
+    <script src="~/Content/assets/global/scripts/google.js"></script>
+</body>
+</html>

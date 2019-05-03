@@ -1,0 +1,83 @@
+﻿@model ZigmaWeb.UI.Areas.User.ViewModels.SetupBlog.EditBlogViewModel
+@using ZigmaWeb.UI.Infrastructure.ExtensionMethod
+@{
+    ViewBag.Title = "تنظیمات وبلاگ";
+}
+
+<div class="portlet light">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="icon-settings font-blue-hoki"></i>
+            <span class="caption-subject font-blue-hoki bold">ویرایش وبلاگ</span>
+            @*<span class="caption-helper">demo form...</span>*@
+        </div>
+    </div>
+    <div class="portlet-body form">
+        <form id="blogForm" novalidate class="validatable-form">
+            @Html.AntiForgeryToken()
+            <div class="form-group form-md-line-input form-md-floating-label">
+                @Html.TextBoxFor(model => model.Blog.Title, new { @class = "form-control", maxlength = 50 })
+                @Html.ValidationMessageFor2(model => model.Blog.Title)
+                @Html.LabelFor(model => model.Blog.Title, new { @class = "control-label" })
+            </div>
+
+            <div class="form-group form-md-line-input form-md-floating-label">
+                @Html.TextBoxFor(model => model.Blog.Name, new { @class = "form-control" , maxlength = 20, @readonly = "" })
+                @Html.ValidationMessageFor2(model => model.Blog.Name)
+                @Html.LabelFor(model => model.Blog.Name, new { @class = "control-label"})
+            </div>
+
+            <div class="form-group form-md-line-input form-md-floating-label">
+                @Html.TextBoxFor(model => model.Blog.Email, new { @class = "form-control" })
+                @Html.ValidationMessageFor2(model => model.Blog.Email)
+                @Html.LabelFor(model => model.Blog.Email, new { @class = "control-label" })
+            </div>
+
+            <div class="form-group form-md-line-input form-md-floating-label">
+                @Html.TextAreaFor(model => model.Blog.Description, new { rows = "4", @class = "form-control", maxlength = 2000 })
+                @Html.LabelFor(model => model.Blog.Description)
+            </div>
+
+            <div class="margiv-top-10">
+                <button type="submit" class="btn blue">ذخیره</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section ComponentScripts{
+    <script src="~/content/assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
+    <script src="~/scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/scripts/jquery.validate.min.js"></script>
+    <script src="~/scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Content/assets/global/plugins/bootstrap-toastr/toastr.min.js"></script>
+}
+
+@section PageScripts{
+    <script src="~/Content/assets/pages/scripts/user_setupblog_edit.js"></script>
+}
+
+@section PageBreadcrumb{
+    <li>
+        <i class="icon-home"></i>
+        <a href="@Url.Action("index", "blog")">وبلاگ</a>
+        <i class="fa fa-angle-left"></i>
+    </li>
+    <li>
+        <span>تنظیمات وبلاگ</span>
+    </li>
+}
+
+@section PageActionsMenu{
+
+}
+
+@section Head {
+    <link href="~/content/assets/global/plugins/bootstrap-toastr/toastr-rtl.min.css" rel="stylesheet" />
+
+    <style>
+        .form-group.form-md-line-input .form-control.edited:not([readonly]) ~ .help-block-error {
+            opacity: 1 !important;
+        }
+    </style>
+}
